@@ -1,0 +1,7 @@
+{
+  "name": "Foodocity",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
