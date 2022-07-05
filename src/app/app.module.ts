@@ -8,13 +8,23 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { IonicStorageModule } from '@ionic/storage-angular';
 import {HttpClientModule} from '@angular/common/http';
-import {httpInterceptorProviders} from './interceptors';
+
+import localeIt from '@angular/common/locales/it';
+import {registerLocaleData} from '@angular/common';
+
+registerLocaleData(localeIt);
+
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, IonicStorageModule.forRoot({
-    name: 'foodocity'}), HttpClientModule],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, httpInterceptorProviders],
+  imports: [
+    BrowserModule,
+    IonicModule.forRoot(),
+    AppRoutingModule, IonicStorageModule.forRoot({
+    name: 'foodocity'}),
+    HttpClientModule
+  ],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Recipes for you</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item button="" *ngFor="let item of recipes" [routerLink]="[item.recipe.uri|slice:51]">
+      <ion-avatar slot="start">
+        <img src="{{item.recipe.image}}" alt="recipe"/>
+      </ion-avatar>
+
+      <ion-label class="ion-text-wrap">
+        <h3>{{ item.recipe.label }}</h3>
+        <p>{{ item.recipe.url }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+  <ion-infinite-scroll (ionInfinite)="loadMore($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data..."> </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

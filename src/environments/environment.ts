@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  appKey: '7d200e1b43a9ec871e660650f3ab6075&app_id=7889584e&type=public',
+  baseUrl: 'https://api.edamam.com/api/recipes/v2',
 };
 
 /*
