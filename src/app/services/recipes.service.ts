@@ -18,7 +18,7 @@ export class RecipeService {
 
   getSimpleSearch(query = ''): Observable<ApiResult> {
     return this.http.get<ApiResult>(
-      `${environment.baseUrl}?q=${query}&app_key=${environment.appKey}`
+      `${environment.baseUrl}?q=${query}&app_key=${environment.appKey}&random=true`
     );
   }
 

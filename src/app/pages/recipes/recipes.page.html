@@ -1,24 +1,49 @@
-<ion-header>
+<ion-header [translucent]="true">
   <ion-toolbar color="primary">
-    <ion-title>Recipes for you</ion-title>
+    <ion-thumbnail>
+      <img alt="logo" src="https://lh5.googleusercontent.com/W71YBsl1QJA8UKNFjPf5I2gt35Z-Rxt9Z0irdQAsJ7bk96XIupftDHV0HpfThfZWE2AVYEmod-P1t6fX3ckUzkj40Ze5MJPqT8JfbLek9QNsdWd1RoePCN6yArKlym6QhejXzbLry3Gee1ZMWA"/>
+    </ion-thumbnail>
+    <ion-buttons slot="end">
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-searchbar
+    debounce="1000"
+    showCancelButton="focus"
+    placeholder="Find Recipe"
+    animated="true"
+    color="light"
+    [(ngModel)]="searchTerm"
+    (keyup.enter)="search($event.target.value)"
+    (search)="search($event.target.value)"
+    (ionClear)="search($event.target.value)"
+  >
+  </ion-searchbar>
   <ion-list>
-    <ion-item button="" *ngFor="let item of recipes" [routerLink]="[item.recipe.uri|slice:51]">
-      <ion-avatar slot="start">
+    <ion-item button="" *ngFor="let item of recipes; index as i" [routerLink]="[item.recipe.uri|slice:51]" color="secondary">
+      <ion-thumbnail [slot]="i%2===0 ? 'start' : 'end'" size="">
         <img src="{{item.recipe.image}}" alt="recipe"/>
-      </ion-avatar>
+      </ion-thumbnail>
 
       <ion-label class="ion-text-wrap">
-        <h3>{{ item.recipe.label }}</h3>
-        <p>{{ item.recipe.url }}</p>
+        <h2 style="color: #4d3827">{{ item.recipe.label }}</h2>
+        <h4>{{ item.recipe.source }}</h4>
+        <p>{{ item.recipe.cuisineType }} food</p>
+        <p>{{ item.recipe.mealType }}</p>
+        <ion-icon name="timer-outline" slot="start"></ion-icon>
+        <ion-text>{{ item.recipe.totalTime > 0 ? item.recipe.totalTime + "'" : 'Time not specified' }}</ion-text>
       </ion-label>
     </ion-item>
   </ion-list>
 
-  <ion-infinite-scroll (ionInfinite)="loadMore($event)">
+  <ion-infinite-scroll (ionInfinite)="loadMore($event)" #normalis>
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data..."> </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+  <ion-infinite-scroll (ionInfinite)="loadMoreSearch($event)" disabled="true" #searchis>
     <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data..."> </ion-infinite-scroll-content>
   </ion-infinite-scroll>
 </ion-content>

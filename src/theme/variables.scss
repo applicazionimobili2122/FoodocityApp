@@ -4,28 +4,36 @@
 /** Ionic CSS Variables **/
 :root {
   /** primary **/
-  --ion-color-primary: #3880ff;
-  --ion-color-primary-rgb: 56, 128, 255;
+  --ion-color-primary: #529434;
+  --ion-color-primary-rgb: 82, 148, 52;
   --ion-color-primary-contrast: #ffffff;
   --ion-color-primary-contrast-rgb: 255, 255, 255;
-  --ion-color-primary-shade: #3171e0;
-  --ion-color-primary-tint: #4c8dff;
+  --ion-color-primary-shade: #529420;
+  --ion-color-primary-tint: #529410;
 
   /** secondary **/
-  --ion-color-secondary: #3dc2ff;
-  --ion-color-secondary-rgb: 61, 194, 255;
-  --ion-color-secondary-contrast: #ffffff;
-  --ion-color-secondary-contrast-rgb: 255, 255, 255;
-  --ion-color-secondary-shade: #36abe0;
-  --ion-color-secondary-tint: #50c8ff;
+  --ion-color-secondary: #c6ffab;
+  --ion-color-secondary-rgb: 198, 255, 171;
+  --ion-color-secondary-contrast: #000000;
+  --ion-color-secondary-contrast-rgb: 0, 0, 0;
+  --ion-color-secondary-shade: #c6ffa0;
+  --ion-color-secondary-tint: #c6ffbb;
 
   /** tertiary **/
-  --ion-color-tertiary: #5260ff;
-  --ion-color-tertiary-rgb: 82, 96, 255;
+  --ion-color-tertiary: #abc94a;
+  --ion-color-tertiary-rgb: 171, 201, 74;
   --ion-color-tertiary-contrast: #ffffff;
   --ion-color-tertiary-contrast-rgb: 255, 255, 255;
-  --ion-color-tertiary-shade: #4854e0;
-  --ion-color-tertiary-tint: #6370ff;
+  --ion-color-tertiary-shade: #aabf3c;
+  --ion-color-tertiary-tint: #abc94a;
+
+  /** quaternary **/
+  --ion-color-quaternary: #4d3827;
+  --ion-color-quaternary-rgb: 77, 56, 39;
+  --ion-color-quaternary-contrast: #ffffff;
+  --ion-color-quaternary-contrast-rgb: 255, 255, 255;
+  --ion-color-quaternary-shade: #4d3827;
+  --ion-color-quaternary-tint: #4d3827;
 
   /** success **/
   --ion-color-success: #2dd36f;
@@ -76,11 +84,11 @@
   --ion-color-light-tint: #f5f6f9;
 }
 
-@media (prefers-color-scheme: dark) {
-  /*
+/*@media (prefers-color-scheme: dark) {
+  !*
    * Dark Colors
    * -------------------------------------------
-   */
+   *!
 
   body {
     --ion-color-primary: #428cff;
@@ -147,10 +155,10 @@
     --ion-color-light-tint: #383a3e;
   }
 
-  /*
+  !*
    * iOS Dark Theme
    * -------------------------------------------
-   */
+   *!
 
   .ios body {
     --ion-background-color: #000000;
@@ -191,10 +199,10 @@
   }
 
 
-  /*
+  !*
    * Material Design Dark Theme
    * -------------------------------------------
-   */
+   *!
 
   .md body {
     --ion-background-color: #121212;
@@ -233,4 +241,4 @@
 
     --ion-card-background: #1e1e1e;
   }
-}
+}*/

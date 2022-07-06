@@ -9,8 +9,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { IonicStorageModule } from '@ionic/storage-angular';
 import {HttpClientModule} from '@angular/common/http';
 
+
 import localeIt from '@angular/common/locales/it';
 import {registerLocaleData} from '@angular/common';
+import {SplashScreen} from '@awesome-cordova-plugins/splash-screen';
 
 registerLocaleData(localeIt);
 
@@ -24,7 +26,9 @@ registerLocaleData(localeIt);
     name: 'foodocity'}),
     HttpClientModule
   ],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
