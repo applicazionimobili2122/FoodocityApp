@@ -24,7 +24,7 @@
   </ion-searchbar>
   <ion-list>
     <ion-item button="" *ngFor="let item of recipes; index as i" [routerLink]="[item.recipe.uri|slice:51]" color="secondary">
-      <ion-thumbnail [slot]="i%2===0 ? 'start' : 'end'" size="">
+      <ion-thumbnail [slot]="i%2===0 ? 'start' : 'end'">
         <img src="{{item.recipe.image}}" alt="recipe"/>
       </ion-thumbnail>
 
@@ -34,7 +34,7 @@
         <p>{{ item.recipe.cuisineType }} food</p>
         <p>{{ item.recipe.mealType }}</p>
         <ion-icon name="timer-outline" slot="start"></ion-icon>
-        <ion-text>{{ item.recipe.totalTime > 0 ? item.recipe.totalTime + "'" : 'Time not specified' }}</ion-text>
+        <ion-text slot="start">{{ item.recipe.totalTime > 0 ? item.recipe.totalTime + "'" : 'Time not specified' }}</ion-text>
       </ion-label>
     </ion-item>
   </ion-list>

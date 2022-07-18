@@ -11,18 +11,15 @@
 
 <ion-content>
   <ion-card *ngIf="recipe as recipe;">
-    <img [src]="recipe.recipe.image" alt="recipe"/>
+    <ion-img [src]="recipe.recipe.image" alt="recipe"></ion-img>
 
     <ion-card-header>
       <ion-card-title> {{ recipe.recipe.label }} </ion-card-title>
       <ion-card-subtitle> <a href='{{ recipe.recipe.url }}'>Open full recipe</a> </ion-card-subtitle>
+      <ion-icon class="icon-big" name="share-outline" color="green" slot="start"></ion-icon>
+      <ion-icon class="icon-big ion-margin-horizontal" color="green" name="heart-outline" slot="start"></ion-icon>
     </ion-card-header>
     <ion-card-content>
-      <ion-label color="medium">Health Labels: </ion-label>
-      <ion-text color="tertiary">
-        <span *ngFor="let g of recipe.recipe.healthLabels;  let isLast = last"> {{ g }} {{ !isLast ? '·' : '' }}</span>
-      </ion-text>
-      <br>
       <ion-label color="medium">Cuisine Type: </ion-label>
       <ion-text color="tertiary">
         <span>{{ recipe.recipe.cuisineType }} Food</span>
@@ -33,8 +30,6 @@
         <span>{{ recipe.recipe.mealType }}</span>
       </ion-text>
       <br>
-      <ion-icon class="icon-big" name="share-outline" slot="start"></ion-icon>
-      <ion-icon class="icon-big ion-margin-horizontal" name="heart-outline" slot="start"></ion-icon>
 
       <ion-item lines="none">
         <ion-icon name="timer-outline" slot="start"></ion-icon>
@@ -49,23 +44,40 @@
         <ion-label>{{ recipe.recipe.calories | number : '1.0-0' }} kcal</ion-label>
       </ion-item>
 
-      <ion-label>Ingredients</ion-label>
-      <ion-list>
-        <div *ngFor="let ingredient of recipe.recipe.ingredientLines">
-          <ion-item>
-            <ion-label class="ion-text-wrap">{{ingredient}}</ion-label>
+      <!-- Opzionalmente si possono mettere degli ion-item intorno alle ion-label e si vedono più grandi-->
+      <ion-accordion-group #accordionGroup>
+        <ion-accordion value="ingredients">
+          <ion-item slot="header" color="light">
+            <ion-label>Ingredients</ion-label>
           </ion-item>
-        </div>
-      </ion-list>
+          <div class="ion-padding" slot="content">
+            <div *ngFor="let ingredient of recipe.recipe.ingredientLines">
+              <ion-label class="ion-text-wrap">{{ingredient}}</ion-label>
+            </div>
+          </div>
+        </ion-accordion>
+        <ion-accordion value="nutrients">
+          <ion-item slot="header" color="light">
+            <ion-label>Nutrients</ion-label>
+          </ion-item>
+          <div class="ion-padding" slot="content">
+            <div *ngFor="let ingredient of recipe.recipe.totalNutrients | keyvalue ">
+              <ion-label class="ion-text-wrap">* {{ingredient.value.label}} {{ingredient.value.quantity | number : '1.0-0':'it-IT' }} {{ingredient.value.unit}}</ion-label>
+            </div>
+          </div>
+        </ion-accordion>
+        <ion-accordion value="health">
+          <ion-item slot="header" color="light">
+            <ion-label>Health Labels</ion-label>
+          </ion-item>
+          <div class="ion-padding" slot="content">
+            <div *ngFor="let g of recipe.recipe.healthLabels">
+              <ion-label class="ion-text-wrap">* {{g}}</ion-label>
+            </div>
+          </div>
+        </ion-accordion>
 
-      <ion-label>Nutrients</ion-label>
-      <ion-list>
-        <div *ngFor="let ingredient of recipe.recipe.totalNutrients | keyvalue ">
-          <ion-item>
-            <ion-label class="ion-text-wrap">{{ingredient.value.label}} {{ingredient.value.quantity | number : '1.0-0':'it-IT' }} {{ingredient.value.unit}}</ion-label>
-          </ion-item>
-        </div>
-      </ion-list>
+      </ion-accordion-group>
     </ion-card-content>
   </ion-card>
 </ion-content>
