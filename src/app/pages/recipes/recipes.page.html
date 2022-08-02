@@ -1,7 +1,8 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="primary">
     <ion-thumbnail>
-      <img alt="logo" src="https://lh5.googleusercontent.com/W71YBsl1QJA8UKNFjPf5I2gt35Z-Rxt9Z0irdQAsJ7bk96XIupftDHV0HpfThfZWE2AVYEmod-P1t6fX3ckUzkj40Ze5MJPqT8JfbLek9QNsdWd1RoePCN6yArKlym6QhejXzbLry3Gee1ZMWA"/>
+      <img alt="logo"
+           src="https://lh5.googleusercontent.com/W71YBsl1QJA8UKNFjPf5I2gt35Z-Rxt9Z0irdQAsJ7bk96XIupftDHV0HpfThfZWE2AVYEmod-P1t6fX3ckUzkj40Ze5MJPqT8JfbLek9QNsdWd1RoePCN6yArKlym6QhejXzbLry3Gee1ZMWA"/>
     </ion-thumbnail>
     <ion-buttons slot="end">
       <ion-menu-button color="light"></ion-menu-button>
@@ -10,20 +11,24 @@
 </ion-header>
 
 <ion-content>
-  <ion-searchbar
-    debounce="1000"
-    showCancelButton="focus"
-    placeholder="Find Recipe"
-    animated="true"
-    color="light"
-    [(ngModel)]="searchTerm"
-    (keyup.enter)="search($event.target.value)"
-    (search)="search($event.target.value)"
-    (ionClear)="search($event.target.value)"
-  >
-  </ion-searchbar>
+  <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px">
+    <ion-searchbar
+      debounce="1000"
+      showCancelButton="focus"
+      placeholder="Find Recipe"
+      animated="true"
+      color="light"
+      [(ngModel)]="searchTerm"
+      (keyup.enter)="search($event.target.value)"
+      (search)="search($event.target.value)"
+      (ionClear)="search($event.target.value)"
+    >
+    </ion-searchbar>
+    <ion-icon name="filter" style="color: white" (click)="toggleFilterContainer()"></ion-icon>
+  </div>
   <ion-list>
-    <ion-item button="" *ngFor="let item of recipes; index as i" [routerLink]="[item.recipe.uri|slice:51]" color="secondary">
+    <ion-item button="" *ngFor="let item of recipes; index as i" [routerLink]="[item.recipe.uri|slice:51]"
+              color="secondary">
       <ion-thumbnail [slot]="i%2===0 ? 'start' : 'end'">
         <img src="{{item.recipe.image}}" alt="recipe"/>
       </ion-thumbnail>
@@ -34,16 +39,33 @@
         <p>{{ item.recipe.cuisineType }} food</p>
         <p>{{ item.recipe.mealType }}</p>
         <ion-icon name="timer-outline" slot="start"></ion-icon>
-        <ion-text slot="start">{{ item.recipe.totalTime > 0 ? item.recipe.totalTime + "'" : 'Time not specified' }}</ion-text>
+        <ion-text
+          slot="start">{{ item.recipe.totalTime > 0 ? item.recipe.totalTime + "'" : 'Time not specified' }}</ion-text>
       </ion-label>
     </ion-item>
   </ion-list>
 
   <ion-infinite-scroll (ionInfinite)="loadMore($event)" #normalis>
-    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data..."> </ion-infinite-scroll-content>
+    <ion-infinite-scroll-content loadingSpinner="bubbles"
+                                 loadingText="Loading more data..."></ion-infinite-scroll-content>
   </ion-infinite-scroll>
 
   <ion-infinite-scroll (ionInfinite)="loadMoreSearch($event)" disabled="true" #searchis>
-    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data..."> </ion-infinite-scroll-content>
+    <ion-infinite-scroll-content loadingSpinner="bubbles"
+                                 loadingText="Loading more data..."></ion-infinite-scroll-content>
   </ion-infinite-scroll>
+
+  <script>
+    const {$} = require("protractor");
+
+    $('#filterContainer').hide();
+
+    $('#filterIcon').on('click', function () {
+      $('#filterContainer').toggle();
+    });
+
+  </script>
+
 </ion-content>
+
+
