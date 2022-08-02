@@ -12,6 +12,7 @@ import {HttpClientModule} from '@angular/common/http';
 
 import localeIt from '@angular/common/locales/it';
 import {registerLocaleData} from '@angular/common';
+import { FirebaseAuthentication } from '@awesome-cordova-plugins/firebase-authentication/ngx';
 import {SplashScreen} from '@awesome-cordova-plugins/splash-screen';
 
 registerLocaleData(localeIt);
