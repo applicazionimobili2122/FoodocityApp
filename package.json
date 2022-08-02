@@ -15,6 +15,7 @@
   "dependencies": {
     "@angular/common": "^14.0.0",
     "@angular/core": "^14.0.0",
+    "@angular/fire": "^7.4.1",
     "@angular/forms": "^14.0.0",
     "@angular/platform-browser": "^14.0.0",
     "@angular/platform-browser-dynamic": "^14.0.0",
@@ -25,6 +26,7 @@
     "@ionic/cordova-builders": "^6.1.0",
     "@ionic/storage-angular": "^3.0.6",
     "cordova-plugin-splashscreen": "^6.0.1",
+    "firebase": "^9.9.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.2.0",
     "zone.js": "~0.11.4"
@@ -54,6 +56,7 @@
     "cordova-plugin-ionic-webview": "^5.0.0",
     "cordova-plugin-statusbar": "^2.4.2",
     "cordova-sqlite-storage": "^6.0.0",
+    "cordova-support-android-plugin": "~1.0.0",
     "eslint": "^7.6.0",
     "eslint-plugin-import": "2.22.1",
     "eslint-plugin-jsdoc": "30.7.6",
@@ -79,7 +82,10 @@
       "cordova-plugin-splashscreen": {},
       "cordova-plugin-ionic-webview": {},
       "cordova-plugin-ionic-keyboard": {},
-      "cordova-plugin-firebase-authentication": {}
+      "cordova-plugin-firebase-authentication": {
+        "ANDROID_FIREBASE_AUTH_VERSION": "21.0.+",
+        "IOS_FIREBASE_POD_VERSION": "~> 8.8.0"
+      }
     },
     "platforms": [
       "ios",
