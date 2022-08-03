@@ -26,7 +26,7 @@ export class AppComponent implements OnInit{
   constructor(private storage: Storage) {
   }
   async ngOnInit() {
-    // If using a custom driver:
+    //// If using a custom driver:
     // await this.storage.defineDriver(MyCustomDriver)
     await this.storage.create();
   }
