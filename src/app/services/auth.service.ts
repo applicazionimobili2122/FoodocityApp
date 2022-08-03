@@ -57,7 +57,7 @@ export class IonicAuthService {
   }
 
   userDetails() {
-    return this.angularFireAuth.user;
+    return this.angularFireAuth.currentUser;
   }
 
 }

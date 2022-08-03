@@ -2,6 +2,9 @@ import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {environment} from 'src/environments/environment';
+import {AngularFirestore} from '@angular/fire/compat/firestore';
+import {IonicAuthService} from './auth.service';
+
 
 export interface ApiResult {
   page: number;
@@ -14,7 +17,10 @@ export interface ApiResult {
   providedIn: 'root',
 })
 export class RecipeService {
-  constructor(private http: HttpClient) {
+
+  constructor(private http: HttpClient,
+              private ionicAuthService: IonicAuthService,
+              private firestore: AngularFirestore) {
   }
 
   getSimpleSearch(query = ''): Observable<ApiResult> {
@@ -58,4 +64,29 @@ export class RecipeService {
       `${environment.baseUrl}?q=${query}&app_key=${environment.appKey}&random=true`
     );
   }
+
+  async favoriteRecipe(recipe) {
+    const user = await this.ionicAuthService.userDetails();
+    if (user) {
+      const favorites = this.firestore.collection(`users/${user.uid}/favorites`);
+      favorites.doc(recipe.substring(51)).get().subscribe(doc => {
+        if (doc.exists) {
+          favorites.doc(recipe.substring(51)).delete();
+        } else {
+          favorites.doc(recipe.substring(51)).set({
+            id: recipe.substring(51),
+          });
+        }
+      });
+    }
+  }
+
+  async isFavoriteRecipe(recipe): Promise<boolean> {
+    const user = await this.ionicAuthService.userDetails();
+    if (user) {
+      const favorites = this.firestore.collection(`users/${user.uid}/favorites`);
+      return favorites.doc(recipe).get().toPromise().then((doc) => doc.exists);
+    }
+  }
 }
+

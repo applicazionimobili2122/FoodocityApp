@@ -16,16 +16,22 @@
     <ion-card-header>
       <ion-card-title> {{ recipe.recipe.label }} </ion-card-title>
       <ion-card-subtitle> <a href='{{ recipe.recipe.url }}'>Open full recipe</a> </ion-card-subtitle>
-      <ion-icon class="icon-big" name="share-outline" color="green" slot="start"></ion-icon>
-      <ion-icon class="icon-big ion-margin-horizontal" color="green" name="heart-outline" slot="start"></ion-icon>
     </ion-card-header>
     <ion-card-content>
-      <ion-label color="medium">Cuisine Type: </ion-label>
+      <ion-icon class="icon-big" color="green" name="share-outline" slot="start"></ion-icon>
+      <ion-icon (click)="favorite(recipe.recipe.uri)"
+                class="icon-big ion-margin-horizontal"
+                color="green"
+                name="heart{{ !isFavorite ? '-outline' : '' }}"
+                slot="start">
+      </ion-icon>
+      <br>
+      <ion-label color="medium">Cuisine Type:</ion-label>
       <ion-text color="tertiary">
         <span>{{ recipe.recipe.cuisineType }} Food</span>
       </ion-text>
       <br>
-      <ion-label color="medium">Meal Type: </ion-label>
+      <ion-label color="medium">Meal Type:</ion-label>
       <ion-text color="tertiary" class="ion-margin-bottom">
         <span>{{ recipe.recipe.mealType }}</span>
       </ion-text>
