@@ -16,7 +16,11 @@ export class AppComponent implements OnInit{
     {
       title: 'List',
       url: '/list',
-      icon: 'list'}
+      icon: 'list'},
+    {
+      title: 'Profile',
+      url: '/profile',
+      icon: 'person'}
   ];
 
   constructor(private storage: Storage) {
