@@ -48,7 +48,7 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {
     this.loginFormModel = this.formBuilder.group({
-      email: ['email', Validators.compose([
+      email: ['user@example.com', Validators.compose([
         Validators.required,
         Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')
       ])],
@@ -71,5 +71,8 @@ export class LoginPage implements OnInit {
       });
   }
 
+  redirectRegister() {
+    this.navController.navigateRoot('/register');
+  }
 }
 

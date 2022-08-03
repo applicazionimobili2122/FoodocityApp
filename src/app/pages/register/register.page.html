@@ -1,0 +1,71 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title color="light" text-center>Sign Up</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding class="animated fadeIn login auth-page">
+  <div class="theme-bg"></div>
+  <div class="auth-content">
+
+    <!-- Logo -->
+    <div padding-horizontal text-center class="animated fadeInDown">
+      <div class="logo"></div>
+    </div>
+
+    <!-- Login form -->
+    <form [formGroup]="registerFormModel" class="list-form">
+      <ion-item no-padding class="animated fadeInUp">
+        <ion-label position="floating">
+          <ion-icon item-start name="contact"></ion-icon>
+          Email
+        </ion-label>
+        <ion-input color="secondary" formControlName="email" type="email"></ion-input>
+      </ion-item>
+      <ng-container *ngFor="let error of error_msg.email">
+        <div
+          *ngIf="registerFormModel.get('email').hasError(error.type) && (registerFormModel.get('email').dirty || registerFormModel.get('email').touched)">
+          <ion-text color="danger">{{ error.message }}</ion-text>
+        </div>
+      </ng-container>
+      <div formGroupName="passwords">
+        <ion-item no-padding class="animated fadeInUp">
+          <ion-label position="floating">
+            <ion-icon item-start name="lock"></ion-icon>
+            Password
+          </ion-label>
+          <ion-input color="secondary" type="password" formControlName="password"></ion-input>
+        </ion-item>
+        <ng-container *ngFor="let error of error_msg.password">
+          <div
+            *ngIf="registerFormModel.get('passwords').get('password').hasError(error.type) && (registerFormModel.get('passwords').get('password').dirty || registerFormModel.get('passwords').get('password').touched)">
+            <ion-text color="danger">{{ error.message }}</ion-text>
+          </div>
+        </ng-container>
+        <ion-item no-padding class="animated fadeInUp">
+          <ion-label position="floating">
+            <ion-icon item-start name="lock"></ion-icon>
+            Password confirmation
+          </ion-label>
+          <ion-input color="secondary" type="password" formControlName="passwordConfirm"></ion-input>
+        </ion-item>
+        <ng-container *ngFor="let error of error_msg.passwordConfirm">
+          <div
+            *ngIf="registerFormModel.get('passwords').get('passwordConfirm').hasError(error.type) && (registerFormModel.get('passwords').get('passwordConfirm').dirty || registerFormModel.get('passwords').get('passwordConfirm').touched)">
+            <ion-text color="danger">{{ error.message }}</ion-text>
+          </div>
+        </ng-container>
+      </div>
+      <div margin-top="20px">
+        <ion-button (click)="onRegister()" [disabled]="!registerFormModel.valid" color="primary" expand="full" icon-left
+                    shape="round"
+                    size="medium" tappable>
+          <ion-icon name="log-in"></ion-icon>
+          Sign Up
+        </ion-button>
+      </div>
+      <ion-text>Already signed up? <a (click)="redirectLogin()" color="primary">Login</a></ion-text>
+      <ion-text class="ion-text-center" color="danger">{{errorMsg}}</ion-text>
+    </form>
+  </div>
+</ion-content>
