@@ -10,17 +10,19 @@ export class AppComponent implements OnInit{
   public appPages = [
     {
       title: 'Home',
-      url: '/home',
+      url: '/recipes',
       icon: 'home'
     },
     {
-      title: 'List',
-      url: '/list',
-      icon: 'list'},
+      title: 'Favourite Recipes',
+      url: '/favourites',
+      icon: 'list'
+    },
     {
       title: 'Profile',
       url: '/profile',
-      icon: 'person'}
+      icon: 'person'
+    }
   ];
 
   constructor(private storage: Storage) {

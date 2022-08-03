@@ -24,7 +24,6 @@ export class UtenteService {
   constructor(private http: HttpClient, private storage: Storage) {
 
     this.storage.get(AUTH_TOKEN).then((token) => {
-      console.log(token);
       this.authToken = token;
       if (token !== null && token !== undefined && token !== '') {
         this.loggedIn$.next(true);

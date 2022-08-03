@@ -15,7 +15,6 @@ export class IonicAuthService {
   }
 
   createUser(value) {
-    console.log(value);
     return new Promise<any>(async (resolve, reject) => {
       const userCredential = await this.angularFireAuth.createUserWithEmailAndPassword(value.email, value.passwords.password);
       const user = userCredential.user;
@@ -47,7 +46,6 @@ export class IonicAuthService {
       if (this.angularFireAuth.currentUser) {
         this.angularFireAuth.signOut()
           .then(() => {
-            console.log('Sign out');
             resolve();
           }).catch(() => {
           reject();

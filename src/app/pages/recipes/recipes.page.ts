@@ -1,13 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {RecipeService} from '../../services/recipes.service';
-import {
-  InfiniteScrollCustomEvent,
-  IonCard,
-  IonInfiniteScroll,
-  IonModal,
-  LoadingController,
-  ModalController
-} from '@ionic/angular';
+import {InfiniteScrollCustomEvent, IonInfiniteScroll, LoadingController, ModalController} from '@ionic/angular';
 import {ModalPageComponent} from '../components/modal.component';
 
 @Component({
@@ -28,7 +21,6 @@ export class RecipesPage implements OnInit {
               private modalController: ModalController) { }
 
   ngOnInit() {
-
     this.loadRecipes();
   }
 

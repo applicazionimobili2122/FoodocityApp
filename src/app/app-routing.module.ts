@@ -13,16 +13,20 @@ const routes: Routes = [
   },
   {
     path: 'recipes',
-    loadChildren: () => import('./pages/recipes/recipes.module').then( m => m.RecipesPageModule)
+    loadChildren: () => import('./pages/recipes/recipes.module').then(m => m.RecipesPageModule)
   },
   {
     path: 'recipes/:id',
-    loadChildren: () => import('./pages/recipes-details/recipes-details.module').then( m => m.RecipesDetailsPageModule)
+    loadChildren: () => import('./pages/recipes-details/recipes-details.module').then(m => m.RecipesDetailsPageModule)
   },
   {
     path: 'register',
     loadChildren: () => import('./pages/register/register.module').then(m => m.RegisterPageModule)
   },
+  {
+    path: 'favourites',
+    loadChildren: () => import('./pages/favourites/favourites.module').then(m => m.FavouritesPageModule)
+  }
 
 ];
 

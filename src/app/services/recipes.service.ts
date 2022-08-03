@@ -88,5 +88,15 @@ export class RecipeService {
       return favorites.doc(recipe).get().toPromise().then((doc) => doc.exists);
     }
   }
+
+  async getFavorites(): Promise<any> {
+    const user = await this.ionicAuthService.userDetails();
+    if (user) {
+      const favorites = this.firestore.collection(`users/${user.uid}/favorites`);
+      return favorites.get().toPromise().then((querySnapshot) => querySnapshot.docs.map(doc => doc.data()));
+    } else {
+      return [];
+    }
+  }
 }
 

@@ -1,0 +1,37 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-thumbnail>
+      <img alt="logo" src="assets/icon/Logo.png ">
+    </ion-thumbnail>
+    <ion-buttons slot="end">
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-text class="ion-text-center" color="light">
+    <h1>Your Favourite Recipes</h1>
+  </ion-text>
+  <ion-list>
+    <ion-item *ngFor="let item of recipes; index as i" [routerLink]="['/recipes', item.recipe.uri|slice:51]" button=""
+              color="secondary">
+      <ion-thumbnail [slot]="i%2===0 ? 'start' : 'end'">
+        <img alt="recipe" src="{{item.recipe.image}}"/>
+      </ion-thumbnail>
+
+      <ion-label class="ion-text-wrap">
+        <h2 style="color: #4d3827">{{ item.recipe.label }}</h2>
+        <h4>{{ item.recipe.source }}</h4>
+        <p>{{ item.recipe.cuisineType }} food</p>
+        <p>{{ item.recipe.mealType }}</p>
+        <ion-icon name="timer-outline" slot="start"></ion-icon>
+        <ion-text
+          slot="start">{{ item.recipe.totalTime > 0 ? item.recipe.totalTime + "'" : 'Time not specified' }}</ion-text>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+</ion-content>
+
+
