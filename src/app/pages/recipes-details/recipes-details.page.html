@@ -18,7 +18,8 @@
       <ion-card-subtitle> <a href='{{ recipe.recipe.url }}'>Open full recipe</a> </ion-card-subtitle>
     </ion-card-header>
     <ion-card-content>
-      <ion-icon class="icon-big" color="green" name="share-outline" slot="start"></ion-icon>
+      <ion-icon (click)="shareRecipe(recipe)" class="icon-big" color="green" name="share-outline"
+                slot="start"></ion-icon>
       <ion-icon (click)="favorite(recipe.recipe.uri)"
                 class="icon-big ion-margin-horizontal"
                 color="green"

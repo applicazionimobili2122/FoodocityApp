@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {RecipeService} from '../../services/recipes.service';
+import {SocialSharing} from '@awesome-cordova-plugins/social-sharing/ngx';
 
 @Component({
   selector: 'app-recipes-details',
@@ -13,6 +14,7 @@ export class RecipesDetailsPage implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private recipeService: RecipeService,
+    private socialSharing: SocialSharing
   ) {}
 
   ngOnInit() {
@@ -41,5 +43,9 @@ export class RecipesDetailsPage implements OnInit {
 
   isFavoriteRecipe(recipe) {
     return this.recipeService.isFavoriteRecipe(recipe.substring(51));
+  }
+
+  shareRecipe(recipe) {
+    this.socialSharing.share(recipe.recipe.label, recipe.recipe.source, '', recipe.recipe.url);
   }
 }

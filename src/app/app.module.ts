@@ -19,6 +19,8 @@ import {AngularFireAuthModule} from '@angular/fire/compat/auth';
 import {AngularFirestoreModule} from '@angular/fire/compat/firestore';
 
 import {environment} from '../environments/environment';
+import {SocialSharing} from '@awesome-cordova-plugins/social-sharing/ngx';
+import {SplashScreen} from '@awesome-cordova-plugins/splash-screen/ngx';
 
 registerLocaleData(localeIt);
 
@@ -37,7 +39,9 @@ registerLocaleData(localeIt);
     HttpClientModule
   ],
   providers: [
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    {provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
+    {provide: SocialSharing},
+    {provide: SplashScreen}
   ],
   bootstrap: [AppComponent],
 })
