@@ -15,8 +15,9 @@ export class IonicAuthService {
   }
 
   createUser(value) {
+    console.log(value);
     return new Promise<any>(async (resolve, reject) => {
-      const userCredential = await this.angularFireAuth.createUserWithEmailAndPassword(value.email, value.password);
+      const userCredential = await this.angularFireAuth.createUserWithEmailAndPassword(value.email, value.passwords.password);
       const user = userCredential.user;
       if (user) {
         const userRef = this.angularFirestore.doc(`users/${user.uid}`);
