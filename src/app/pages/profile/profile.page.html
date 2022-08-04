@@ -1,0 +1,39 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-thumbnail>
+      <img alt="logo" src="assets/icon/Logo.png ">
+    </ion-thumbnail>
+    <ion-buttons slot="end">
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-text class="ion-text-center" color="dark">
+    <h1>Your Profile</h1>
+  </ion-text>
+  <ion-text class="ion-text-left" color="dark">
+    <h4>Email</h4>
+  </ion-text>
+  <ion-card *ngIf="user as user;">
+
+    <ion-card-content>
+      <ion-text class="ion-text-left" color="dark">
+
+        <h4>{{ user.user.email }}</h4>
+      </ion-text>
+    </ion-card-content>
+  </ion-card>
+  <br>
+  <ion-button (click)="editProfile()" color="primary" expand="full" icon-left
+               shape="round"
+               size="medium" tappable>
+    <ion-icon name="edit-profile"></ion-icon>
+    Edit profile
+  </ion-button>
+</ion-content>
+
+
+

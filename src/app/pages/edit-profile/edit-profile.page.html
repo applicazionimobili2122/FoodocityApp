@@ -1,0 +1,80 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/profile"></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+
+<ion-content>
+  <ion-text class="ion-text-center" color="dark">
+    <h1>Edit Profile</h1>
+  </ion-text>
+ <!--<form [formGroup]="editProfileFormModel" class="list-form">
+    <ion-item no-padding class="animated fadeInUp">
+      <ion-label position="floating">
+        <ion-icon item-start name="contact"></ion-icon>
+        Email
+      </ion-label>
+      <ion-input color="secondary" formControlName="email" type="email" disabled></ion-input>
+    </ion-item>
+
+    <div formGroupName="passwords">
+      <ion-item no-padding class="animated fadeInUp">
+        <ion-label position="floating">
+          <ion-icon item-start name="lock"></ion-icon>
+          Old password
+        </ion-label>
+        <ion-input color="secondary" type="password" formControlName="oldPassword"></ion-input>
+      </ion-item>
+      <ng-container *ngFor="let error of error_msg.password">
+        <div
+          *ngIf="editProfileFormModel.get('passwords').get('oldPassword').hasError(error.type) && (editProfileFormModel.get('passwords').get('oldPassword').dirty || editProfileFormModel.get('passwords').get('oldPassword').touched)">
+          <ion-text color="danger">{{ error.message }}</ion-text>
+        </div>
+      </ng-container>
+
+      <ion-item no-padding class="animated fadeInUp">
+        <ion-label position="floating">
+          <ion-icon item-start name="lock"></ion-icon>
+          New password
+        </ion-label>
+        <ion-input color="secondary" type="password" formControlName="password"></ion-input>
+      </ion-item>
+      <ng-container *ngFor="let error of error_msg.password">
+        <div
+          *ngIf="editProfileFormModel.get('passwords').get('password').hasError(error.type) && (editProfileFormModel.get('passwords').get('password').dirty || editProfileFormModel.get('passwords').get('password').touched)">
+          <ion-text color="danger">{{ error.message }}</ion-text>
+        </div>
+      </ng-container>
+      <ion-item no-padding class="animated fadeInUp">
+        <ion-label position="floating">
+          <ion-icon item-start name="lock"></ion-icon>
+          New password confirmation
+        </ion-label>
+        <ion-input color="secondary" type="password" formControlName="passwordConfirm"></ion-input>
+      </ion-item>
+      <ng-container *ngFor="let error of error_msg.passwordConfirm">
+        <div
+          *ngIf="editProfileFormModel.get('passwords').get('passwordConfirm').hasError(error.type) && (editProfileFormModel.get('passwords').get('passwordConfirm').dirty ||editProfileFormModel.get('passwords').get('passwordConfirm').touched)">
+          <ion-text color="danger">{{ error.message }}</ion-text>
+        </div>
+      </ng-container>
+    </div>
+    <div margin-top="20px">
+      <ion-button (click)="onEditProfile()" color="primary" expand="full" icon-left
+                  shape="round"
+                  size="medium" tappable>
+        <ion-icon name="edit"></ion-icon>
+       Save
+      </ion-button>
+    </div>
+  </form>-->
+
+</ion-content>
+
