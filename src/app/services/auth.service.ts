@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {AngularFireAuth} from '@angular/fire/compat/auth';
 import {AngularFirestore} from '@angular/fire/compat/firestore';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -36,7 +37,10 @@ export class IonicAuthService {
     return new Promise<any>((resolve, reject) => {
       this.angularFireAuth.signInWithEmailAndPassword(value.email, value.password)
         .then(
-          res => resolve(res),
+          res => {
+            resolve(res);
+            this.angularFireAuth.setPersistence('LOCAL');
+          },
           err => reject(err));
     });
   }
