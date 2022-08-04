@@ -1,48 +1,37 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title color="light" text-center>Login</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content padding class="animated fadeIn login auth-page">
   <div class="theme-bg"></div>
   <div class="auth-content">
 
     <!-- Logo -->
-    <div padding-horizontal text-center class="animated fadeInDown">
-      <div class="logo"></div>
+    <div padding-horizontal text-center class="animated fadeInDown ion-text-center">
+      <img class="login-logo" alt="logo" src="assets/icon/Logo.png">
     </div>
 
+    <ion-text class="ion-text-center"><h4>SIGN IN</h4></ion-text>
     <!-- Login form -->
     <form [formGroup]="loginFormModel" class="list-form">
-      <ion-item no-padding class="animated fadeInUp">
-        <ion-label position="floating">
-          <ion-icon item-start name="contact"></ion-icon>
-          Email
-        </ion-label>
-        <ion-input color="secondary" formControlName="email" type="email"></ion-input>
-      </ion-item>
+      <div class="form-item animated fadeInUp">
+        <ion-label position="floating">Email</ion-label>
+        <ion-input formControlName="email" type="email"></ion-input>
+      </div>
       <ng-container *ngFor="let error of error_msg.email">
-        <div
+        <div class="form-item"
           *ngIf="loginFormModel.get('email').hasError(error.type) && (loginFormModel.get('email').dirty || loginFormModel.get('email').touched)">
           <ion-text color="danger">{{ error.message }}</ion-text>
         </div>
       </ng-container>
-      <ion-item no-padding class="animated fadeInUp">
-        <ion-label position="floating">
-          <ion-icon item-start name="lock"></ion-icon>
-          Password
-        </ion-label>
-        <ion-input color="secondary" type="password" formControlName="password"></ion-input>
-      </ion-item>
+      <div class="form-item animated fadeInUp">
+        <ion-label position="floating">Password</ion-label>
+        <ion-input type="password" formControlName="password"></ion-input>
+      </div>
       <ng-container *ngFor="let error of error_msg.password">
-        <div
+        <div class="form-item" style="margin-bottom: 1em"
           *ngIf="loginFormModel.get('password').hasError(error.type) && (loginFormModel.get('password').dirty || loginFormModel.get('password').touched)">
           <ion-text color="danger">{{ error.message }}</ion-text>
         </div>
       </ng-container>
-      <div margin-top="20px">
-        <ion-button (click)="onLogin()" [disabled]="!loginFormModel.valid" color="primary" expand="full" icon-left
+      <div margin-top="20px" style="width: 100%; text-align: center">
+        <ion-button (click)="onLogin()" [disabled]="!loginFormModel.valid" color="primary" icon-left
                     shape="round"
                     size="medium" tappable>
           <ion-icon name="log-in"></ion-icon>
