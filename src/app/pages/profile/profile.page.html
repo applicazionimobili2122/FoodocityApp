@@ -10,22 +10,18 @@
 </ion-header>
 
 
-<ion-content>
+<ion-content *ngIf="user as user">
   <ion-text class="ion-text-center" color="dark">
     <h1>Your Profile</h1>
   </ion-text>
   <ion-text class="ion-text-left" color="dark">
-    <h4>Email</h4>
+    <h3><strong>Email</strong></h3>
   </ion-text>
-  <ion-card *ngIf="user as user;">
 
-    <ion-card-content>
       <ion-text class="ion-text-left" color="dark">
-
-        <h4>{{ user.user.email }}</h4>
+        <h3>{{user.email}}</h3>
       </ion-text>
-    </ion-card-content>
-  </ion-card>
+
   <br>
   <ion-button (click)="editProfile()" color="primary" expand="full" icon-left
                shape="round"
