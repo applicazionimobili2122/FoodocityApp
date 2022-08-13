@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {Storage} from '@ionic/storage-angular';
-import {SplashScreen} from '@awesome-cordova-plugins/splash-screen/ngx';
 import {IonicAuthService} from './services/auth.service';
 import {NavController} from '@ionic/angular';
 
@@ -25,11 +24,15 @@ export class AppComponent implements OnInit {
       title: 'Profile',
       url: '/profile',
       icon: 'person'
+    },
+    {
+      title: 'Health and Diet',
+      url: '/health',
+      icon: 'nutrition'
     }
   ];
 
   constructor(private storage: Storage,
-              private splashScreen: SplashScreen,
               private authService: IonicAuthService,
               private navController: NavController) {
   }

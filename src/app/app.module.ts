@@ -20,17 +20,17 @@ import {AngularFirestoreModule} from '@angular/fire/compat/firestore';
 
 import {environment} from '../environments/environment';
 import {SocialSharing} from '@awesome-cordova-plugins/social-sharing/ngx';
-import {SplashScreen} from '@awesome-cordova-plugins/splash-screen/ngx';
 
 registerLocaleData(localeIt);
 
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent,],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
-    AppRoutingModule, IonicStorageModule.forRoot({
+    AppRoutingModule,
+    IonicStorageModule.forRoot({
       name: 'foodocity'
     }),
     AngularFireModule.initializeApp(environment.firebase),
@@ -40,8 +40,7 @@ registerLocaleData(localeIt);
   ],
   providers: [
     {provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
-    {provide: SocialSharing},
-    {provide: SplashScreen}
+    {provide: SocialSharing}
   ],
   bootstrap: [AppComponent],
 })
