@@ -30,9 +30,13 @@ export class AppComponent implements OnInit {
       title:'Discover New Recipes',
       url:'/new-recipes',
       icon:'list'
+    },
+    {
+      title: 'Health and Diet',
+      url: '/health',
+      icon: 'nutrition'
     }
   ];
-  //Discover new recipes
 
   constructor(private storage: Storage,
               private splashScreen: SplashScreen,
