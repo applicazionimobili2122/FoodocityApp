@@ -25,8 +25,14 @@ export class AppComponent implements OnInit {
       title: 'Profile',
       url: '/profile',
       icon: 'person'
+    },
+    {
+      title:'Discover New Recipes',
+      url:'/new-recipes',
+      icon:'list'
     }
   ];
+  //Discover new recipes
 
   constructor(private storage: Storage,
               private splashScreen: SplashScreen,
