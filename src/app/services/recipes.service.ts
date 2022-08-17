@@ -1,4 +1,4 @@
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpUrlEncodingCodec} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {environment} from 'src/environments/environment';
@@ -38,12 +38,48 @@ export class RecipeService {
                     dishType: string[] = []): Observable<ApiResult> {
 
     let url = `${environment.baseUrl}?q=${query}&app_key=${environment.appKey}&random=true`;
-    const dietQuery = diet.length > 0 ? `&diet=${diet.join(',')}` : '';
-    const healthQuery = health.length > 0 ? `&health=${health.join(',')}` : '';
-    const cuisineTypeQuery = cuisineType.length > 0 ? `&cuisineType=${cuisineType.join(',')}` : '';
-    const mealTypeQuery = mealType.length > 0 ? `&mealType=${mealType.join(',')}` : '';
-    const dishTypeQuery = dishType.length > 0 ? `&dishType=${dishType.join(',')}` : '';
-    url += `${dietQuery}${healthQuery}${cuisineTypeQuery}${mealTypeQuery}${dishTypeQuery}`;
+    if (diet.length > 0) {
+      diet.forEach(q => {
+        if (!(q === '')) {
+          url += `&diet=${q}`;
+        }
+      });
+    }
+    if (health.length > 0) {
+      health.forEach(q => {
+        if (!(q === '')) {
+          url += `&health=${q}`;
+        }
+      });
+    }
+    if (cuisineType.length > 0) {
+      cuisineType.forEach(q => {
+        if (!(q === '')) {
+          url += `&cuisine=${q}`;
+        }
+      });
+    }
+    if (mealType.length > 0) {
+      mealType.forEach(q => {
+        if (!(q === '')) {
+          if (q === 'lunch/dinner') {
+            q = 'lunch//dinner';
+            url += `&mealType=${q}`;
+          } else {
+            url += `&mealType=${q}`;
+          }
+        }
+      });
+    }
+    if (dishType.length > 0) {
+      dishType.forEach(q => {
+        if (!(q === '')) {
+          url += `&dishType=${q}`;
+        }
+      });
+    }
+
+    console.log(url);
 
     return this.http.get<ApiResult>(
       url

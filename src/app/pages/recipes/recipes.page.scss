@@ -37,12 +37,12 @@ ion-icon {
   font-size: 1.3rem;
 }
 
-ion-card.fullscreen {
+.filters-container {
+  background-color: white;
   position: absolute;
   top: 0;
   left: 0;
-  display: block;
   width: 100%;
-  height: 100%;
+  height: 100vh;
+  z-index: 10;
 }
-

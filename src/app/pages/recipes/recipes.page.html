@@ -9,6 +9,142 @@
   </ion-toolbar>
 </ion-header>
 
+<div class="filters-container" id="filtersContainer" style="display: none">
+  <ion-icon name="close"
+            style="color: black; width: 40px; height: 40px; position: absolute; float: right; top:43px; right: 15px"
+            (click)="toggleFilterContainer()"></ion-icon>
+  <h3 style="text-align: center; color: black; margin-top: 50px">FILTER</h3>
+  <ion-list>
+    <ion-item>
+      <ion-label>Diet Types</ion-label>
+      <ion-select #dietTypes value="" [multiple]="true">
+        <ion-select-option value="">All</ion-select-option>
+        <ion-select-option value="balanced">Balanced</ion-select-option>
+        <ion-select-option value="high-fiber">High-Fiber</ion-select-option>
+        <ion-select-option value="high-protein">High-Protein</ion-select-option>
+        <ion-select-option value="low-carb">Low-Carb</ion-select-option>
+        <ion-select-option value="low-fat">Low-Fat</ion-select-option>
+        <ion-select-option value="low-sodium">Low-Sodium</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Health Types</ion-label>
+      <ion-select #healthTypes value="" [multiple]="true">
+        <ion-select-option value="">All</ion-select-option>
+        <ion-select-option value="alcohol-cocktail">Alcohol-Cocktail</ion-select-option>
+        <ion-select-option value="alcohol-free">Alcohol-Free</ion-select-option>
+        <ion-select-option value="celery-free">Celery-Free</ion-select-option>
+        <ion-select-option value="crustacean-free">Crustacean-Free</ion-select-option>
+        <ion-select-option value="dairy-free">Dairy-Free</ion-select-option>
+        <ion-select-option value="DASH">DASH</ion-select-option>
+        <ion-select-option value="egg-free">Egg-Free</ion-select-option>
+        <ion-select-option value="fish-free">Fish-Free</ion-select-option>
+        <ion-select-option value="fodmap-free">Fodmap-Free</ion-select-option>
+        <ion-select-option value="gluten-free">Gluten-Free</ion-select-option>
+        <ion-select-option value="immuno-supportive">Immuno-Supportive</ion-select-option>
+        <ion-select-option value="keto-friendly">Keto-Friendly</ion-select-option>
+        <ion-select-option value="kidney-friendly">Kidney-Friendly</ion-select-option>
+        <ion-select-option value="kosher">Kosher</ion-select-option>
+        <ion-select-option value="low-potassium">Low-Potassium</ion-select-option>
+        <ion-select-option value="low-sugar">Low-Sugar</ion-select-option>
+        <ion-select-option value="lupine-free">Lupine-Free</ion-select-option>
+        <ion-select-option value="Mediterranean">Mediterranean</ion-select-option>
+        <ion-select-option value="mollusk-free">Mollusk-Free</ion-select-option>
+        <ion-select-option value="mustard-free">Mustard-Free</ion-select-option>
+        <ion-select-option value="No-oil-added">No-Oil-added</ion-select-option>
+        <ion-select-option value="paleo">Paleo</ion-select-option>
+        <ion-select-option value="peanut-free">Peanut-Free</ion-select-option>
+        <ion-select-option value="pecatarian">Pecatarian</ion-select-option>
+        <ion-select-option value="pork-free">Pork-Free</ion-select-option>
+        <ion-select-option value="red-meat-free">Red-Meat-free</ion-select-option>
+        <ion-select-option value="sesame-free">Sesame-Free</ion-select-option>
+        <ion-select-option value="shellfish-free">Shellfish-Free</ion-select-option>
+        <ion-select-option value="soy-free">Soy-Free</ion-select-option>
+        <ion-select-option value="sugar-conscious">Sugar-Conscious</ion-select-option>
+        <ion-select-option value="sulfite-free">Sulfite-Free</ion-select-option>
+        <ion-select-option value="tree-nut-free">Tree-Nut-free</ion-select-option>
+        <ion-select-option value="vegan">Vegan</ion-select-option>
+        <ion-select-option value="vegetarian">Vegetarian</ion-select-option>
+        <ion-select-option value="wheat-free">Wheat-Free</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Meal Types</ion-label>
+      <ion-select #mealTypes value="" [multiple]="true">
+        <ion-select-option value="">All</ion-select-option>
+        <ion-select-option value="breakfast">Breakfast</ion-select-option>
+        <ion-select-option value="brunch">Brunch</ion-select-option>
+        <ion-select-option value="lunch/dinner">Lunch/Dinner</ion-select-option>
+        <ion-select-option value="snack">Snack</ion-select-option>
+        <ion-select-option value="teatime">Teatime</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Cuisine Types</ion-label>
+      <ion-select #cuisineTypes value="" [multiple]="true">
+        <ion-select-option value="">All</ion-select-option>
+        <ion-select-option value="american">American</ion-select-option>
+        <ion-select-option value="asian">Asian</ion-select-option>
+        <ion-select-option value="british">British</ion-select-option>
+        <ion-select-option value="caribbean">Caribbean</ion-select-option>
+        <ion-select-option value="central europe">Central europe</ion-select-option>
+        <ion-select-option value="chinese">Chinese</ion-select-option>
+        <ion-select-option value="eastern europe">Eastern europe</ion-select-option>
+        <ion-select-option value="french">French</ion-select-option>
+        <ion-select-option value="greek">Greek</ion-select-option>
+        <ion-select-option value="indian">Indian</ion-select-option>
+        <ion-select-option value="italian">Italian</ion-select-option>
+        <ion-select-option value="japanese">Japanese</ion-select-option>
+        <ion-select-option value="korean">Korean</ion-select-option>
+        <ion-select-option value="kosher">Kosher</ion-select-option>
+        <ion-select-option value="mediterranean">Mediterranean</ion-select-option>
+        <ion-select-option value="mexican">Mexican</ion-select-option>
+        <ion-select-option value="middle eastern">Middle eastern</ion-select-option>
+        <ion-select-option value="nordic">Nordic</ion-select-option>
+        <ion-select-option value="south american">South american</ion-select-option>
+        <ion-select-option value="south east asian">South east asian</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label>Dish Types</ion-label>
+      <ion-select #dishTypes value="" [multiple]="true">
+        <ion-select-option value="">All</ion-select-option>
+        <ion-select-option value="alcohol cocktail">Alcohol cocktail</ion-select-option>
+        <ion-select-option value="biscuits and cookies">Biscuits and cookies</ion-select-option>
+        <ion-select-option value="bread">Bread</ion-select-option>
+        <ion-select-option value="cereals">Cereals</ion-select-option>
+        <ion-select-option value="condiments and sauces">Condiments and sauces</ion-select-option>
+        <ion-select-option value="desserts">Desserts</ion-select-option>
+        <ion-select-option value="drinks">Drinks</ion-select-option>
+        <ion-select-option value="egg">Egg</ion-select-option>
+        <ion-select-option value="ice cream and custard">Ice cream and custard</ion-select-option>
+        <ion-select-option value="main course">Main course</ion-select-option>
+        <ion-select-option value="pancake">Pancake</ion-select-option>
+        <ion-select-option value="pasta">Pasta</ion-select-option>
+        <ion-select-option value="pastry">Pastry</ion-select-option>
+        <ion-select-option value="pies and tarts">Pies and tarts</ion-select-option>
+        <ion-select-option value="pizza">Pizza</ion-select-option>
+        <ion-select-option value="preps">Preps</ion-select-option>
+        <ion-select-option value="preserve">Preserve</ion-select-option>
+        <ion-select-option value="salad">Salad</ion-select-option>
+        <ion-select-option value="sandwiches">Sandwiches</ion-select-option>
+        <ion-select-option value="seafood">Seafood</ion-select-option>
+        <ion-select-option value="side dish">Side dish</ion-select-option>
+        <ion-select-option value="soup">Soup</ion-select-option>
+        <ion-select-option value="special occasions">Special occasions</ion-select-option>
+        <ion-select-option value="starter">Starter</ion-select-option>
+        <ion-select-option value="sweets">Sweets</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+  <div style="width: 100%; text-align: center; margin-top: 20px">
+    <ion-button (click)="resetFilters()" color="primary"
+                shape="round"
+                size="medium" tappable>RESET
+    </ion-button>
+  </div>
+</div>
+
 <ion-content>
   <div style="display: flex; justify-content: space-between; align-items: center; padding: 12px">
     <ion-searchbar
@@ -18,9 +154,9 @@
       animated="true"
       color="light"
       [(ngModel)]="searchTerm"
-      (keyup.enter)="search($event.target.value)"
-      (search)="search($event.target.value)"
-      (ionClear)="search($event.target.value)"
+      (keyup.enter)="search($event.target.value, dietTypes.value, healthTypes.value, dishTypes.value, cuisineTypes.value, mealTypes.value)"
+      (search)="search($event.target.value, dietTypes.value, healthTypes.value, dishTypes.value, cuisineTypes.value, mealTypes.value)"
+      (ionClear)="resetFilters(); search($event.target.value, dietTypes.value, healthTypes.value, dishTypes.value, cuisineTypes.value, mealTypes.value)"
     >
     </ion-searchbar>
     <ion-icon name="filter" style="color: white" (click)="toggleFilterContainer()"></ion-icon>
@@ -28,15 +164,17 @@
   <ion-list>
     <ion-item button="" *ngFor="let item of recipes; index as i" [routerLink]="[item.recipe.uri|slice:51]"
               color="secondary">
+
       <ion-thumbnail [slot]="i%2===0 ? 'start' : 'end'">
         <img src="{{item.recipe.image}}" alt="recipe"/>
       </ion-thumbnail>
 
       <ion-label class="ion-text-wrap">
         <h2 style="color: #4d3827">{{ item.recipe.label }}</h2>
+
         <h4>{{ item.recipe.source }}</h4>
-        <p>{{ item.recipe.cuisineType }} food</p>
-        <p>{{ item.recipe.mealType }}</p>
+        <p>{{ item.recipe.cuisineTypes }} food</p>
+        <p>{{ item.recipe.mealTypes }}</p>
         <ion-icon name="timer-outline" slot="start"></ion-icon>
         <ion-text
           slot="start">{{ item.recipe.totalTime > 0 ? item.recipe.totalTime + "'" : 'Time not specified' }}</ion-text>

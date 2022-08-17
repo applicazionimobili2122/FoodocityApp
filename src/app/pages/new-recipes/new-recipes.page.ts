@@ -1,7 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {RecipeService} from '../../services/recipes.service';
 import {InfiniteScrollCustomEvent, IonInfiniteScroll, LoadingController, ModalController} from '@ionic/angular';
-import {ModalPageComponent} from '../components/modal.component';
 
 @Component({
   selector: 'app-recipes',
@@ -101,13 +100,5 @@ export class NewRecipesPage implements OnInit {
         }
       );
     }
-  }
-
-  async toggleFilterContainer() {
-    const modal = await this.modalController.create({
-      component: ModalPageComponent,
-      cssClass: 'fullscreen'
-    });
-    return await modal.present();
   }
 }

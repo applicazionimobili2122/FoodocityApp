@@ -39,7 +39,6 @@ export class AppComponent implements OnInit {
   ];
 
   constructor(private storage: Storage,
-              private splashScreen: SplashScreen,
               private authService: IonicAuthService,
               private navController: NavController) {
   }
