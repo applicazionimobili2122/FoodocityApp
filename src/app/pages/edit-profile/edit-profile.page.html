@@ -22,12 +22,12 @@
           <ion-icon item-start name="lock"></ion-icon>
           Old password
         </ion-label>
-        <ion-input color="secondary" type="password" formControlName="oldPassword"></ion-input>
+        <ion-input color="secondary" type="password" formControlName="oldPassword" #oldPassword></ion-input>
       </ion-item>
       <ng-container *ngFor="let error of error_msg.oldPassword">
         <div
           *ngIf="editProfileFormModel.get('passwords').get('oldPassword').hasError(error.type) && (editProfileFormModel.get('passwords').get('oldPassword').dirty || editProfileFormModel.get('passwords').get('oldPassword').touched)">
-          <ion-text color="danger">{{ error.message }}</ion-text>
+          <ion-text color="danger" #errorOldPassword>{{ error.message }}</ion-text>
         </div>
       </ng-container>
 
@@ -65,7 +65,6 @@
         Save
       </ion-button>
     </div>
-
   </form>
 </ion-content>
 

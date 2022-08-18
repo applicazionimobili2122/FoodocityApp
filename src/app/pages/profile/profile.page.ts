@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {IonicAuthService} from '../../services/auth.service';
 import {ActivatedRoute} from '@angular/router';
 import {InfiniteScrollCustomEvent, NavController} from '@ionic/angular';
@@ -9,10 +9,11 @@ import {InfiniteScrollCustomEvent, NavController} from '@ionic/angular';
   styleUrls: ['./profile.page.scss'],
 })
 export class ProfilePage {
-user = null;
+  user = null;
 
   constructor(private ionicAuthService: IonicAuthService,
-              private navController: NavController) { }
+              private navController: NavController) {
+  }
 
   ionViewWillEnter() {
     this.user = null;
@@ -20,11 +21,11 @@ user = null;
   }
 
   async loadUser() {
-  this.ionicAuthService.userDetails().then(
-    (response) => {
-      this.user = response;
-    }
-  );
+    this.ionicAuthService.userDetails().then(
+      (response) => {
+        this.user = response;
+      }
+    );
   }
 
   editProfile() {

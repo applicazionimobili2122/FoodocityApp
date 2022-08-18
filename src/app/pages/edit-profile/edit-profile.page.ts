@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators} from '@angular/forms';
 import {AlertController, NavController} from '@ionic/angular';
 import {UtenteService} from '../../services/utente.service';
 import {IonicAuthService} from '../../services/auth.service';
+import {reauthenticateWithCredential} from '@angular/fire/auth';
+import firebase from 'firebase/compat/app';
+import EmailAuthProvider = firebase.auth.EmailAuthProvider;
 
 @Component({
   selector: 'app-edit-profile',
@@ -11,6 +14,7 @@ import {IonicAuthService} from '../../services/auth.service';
 })
 export class EditProfilePage implements OnInit {
 
+  @ViewChild('oldPassword') oldPassword;
   successMsg = '';
   errorMsg = '';
   // eslint-disable-next-line @typescript-eslint/naming-convention
@@ -52,44 +56,29 @@ export class EditProfilePage implements OnInit {
     ]
   };
 
-
   editProfileFormModel: FormGroup;
- user = null;
+  user = null;
 
   constructor(private formBuilder: FormBuilder,
               private alertController: AlertController,
               private navController: NavController,
               private utenteService: UtenteService,
-              private ionicAuthService: IonicAuthService) { }
-
+              private ionicAuthService: IonicAuthService) {
+  }
 
 
   ngOnInit() {
     this.editProfileFormModel = this.formBuilder.group({
       passwords: this.formBuilder.group({
         oldPassword: ['', [Validators.required]],
-        password: ['', Validators.compose( [Validators.required, Validators.minLength(6)])],
-        passwordConfirm: ['', Validators.compose( [Validators.required, Validators.minLength(6)])],
+        password: ['', Validators.compose([Validators.required, Validators.minLength(6)])],
+        passwordConfirm: ['', Validators.compose([Validators.required, Validators.minLength(6)])],
       }, {validator: this.validatePassword}),
     });
   }
 
 
   validatePassword(control: AbstractControl): ValidationErrors | null {
-   /* this.ionicAuthService.userDetails().then(
-      (response) => {
-        this.user = response;
-      }
-    );*/
-
-    //check sulla vecchia password
-     /* if (control && control.get('oldPassword')) {
-        const oldPassword = control.get('oldPassword').value;
-        if (oldPassword !==this.currentPassword) {
-          control.get('oldPassword').setErrors({wrongPassword: true});
-        }
-      }*/
-
     //check sul matching tra nuova password e conferma nuova password
     if (control && control.get('password') && control.get('passwordConfirm')) {
       const password = control.get('password').value;
@@ -101,35 +90,32 @@ export class EditProfilePage implements OnInit {
     return null;
   }
 
-  /*checkOldPassword(control: AbstractControl): ValidationErrors | null {
+  onEditPassword() {
     this.ionicAuthService.userDetails().then(
       (response) => {
         this.user = response;
+
+        const credential = EmailAuthProvider.credential(
+          this.user.email,
+          this.editProfileFormModel.value.passwords.oldPassword
+        );
+
+        reauthenticateWithCredential(this.user, credential).then(() => {
+          this.ionicAuthService.userDetails().then(
+            (res) => {
+              this.user = res.updatePassword(this.editProfileFormModel.value.passwords.password);
+              this.errorMsg = '';
+              this.navController.navigateRoot('/profile');
+            }, error => {
+              this.errorMsg = error.message;
+              this.successMsg = '';
+            });
+        }).catch((error) => {
+          this.editProfileFormModel.get('passwords').get('oldPassword').setErrors({wrongPassword: true});
+        });
       }
     );
 
-      if (control && control.get('oldPassword')) {
-            const oldPassword = control.get('oldPassword').value;
-            const currentPassword =  this.user.password ;
-            if (oldPassword !== currentPassword) {
-              control.get('oldPassword').setErrors({wrongPassword: true});
-            }
-          }
-          return null;
-
-        }*/
-
-
- onEditPassword() {
-   this.ionicAuthService.userDetails().then(
-     (response) => {
-       this.user= response.updatePassword(this.editProfileFormModel.value.passwords.password);
-       this.errorMsg = '';
-       this.navController.navigateRoot('/profile');
-     }, error => {
-       this.errorMsg = error.message;
-       this.successMsg = '';
-     });
+    return null;
   }
-
 }
