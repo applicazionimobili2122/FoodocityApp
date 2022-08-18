@@ -57,6 +57,7 @@ export class EditProfilePage implements OnInit {
   };
 
   editProfileFormModel: FormGroup;
+  message;
   user = null;
 
   constructor(private formBuilder: FormBuilder,
@@ -64,6 +65,9 @@ export class EditProfilePage implements OnInit {
               private navController: NavController,
               private utenteService: UtenteService,
               private ionicAuthService: IonicAuthService) {
+  }
+  ionViewWillEnter() {
+    this.message = document.getElementById('msg');
   }
 
 
@@ -105,11 +109,16 @@ export class EditProfilePage implements OnInit {
             (res) => {
               this.user = res.updatePassword(this.editProfileFormModel.value.passwords.password);
               this.errorMsg = '';
-              this.navController.navigateRoot('/profile');
+              this.message.style.display = 'block';
+              this.message.innerHTML = 'Password changed successfully!';
+              setTimeout(() => {
+                this.message.style.display = 'none';
+              } , 4000);
             }, error => {
               this.errorMsg = error.message;
               this.successMsg = '';
             });
+
         }).catch((error) => {
           this.editProfileFormModel.get('passwords').get('oldPassword').setErrors({wrongPassword: true});
         });

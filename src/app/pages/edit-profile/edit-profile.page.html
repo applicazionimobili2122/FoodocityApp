@@ -11,7 +11,7 @@
 
 <ion-content class="animated fadeIn login auth-page">
 
-  <ion-text class="ion-text-center"><h4>EDIT PROFILE</h4></ion-text>
+  <ion-text class="ion-text-center"><h4>CHANGE PASSWORD</h4></ion-text>
 
   <!-- Edit profile form -->
   <form [formGroup]="editProfileFormModel" class="list-form">
@@ -64,6 +64,7 @@
                   size="medium" tappable>
         Save
       </ion-button>
+      <span id="msg" style="display: none; color: green"></span>
     </div>
   </form>
 </ion-content>
