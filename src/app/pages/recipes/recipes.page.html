@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="primary">
     <ion-thumbnail>
-      <img alt="logo" src="assets/icon/Logo.png ">
+      <a href="/recipes"><img alt="logo" src="assets/icon/Logo.png"></a>
     </ion-thumbnail>
     <ion-buttons slot="end">
       <ion-menu-button color="light"></ion-menu-button>
@@ -12,7 +12,7 @@
 <div class="filters-container" id="filtersContainer" style="display: none">
   <ion-icon name="close"
             style="color: black; width: 40px; height: 40px; position: absolute; float: right; top:43px; right: 15px"
-            (click)="toggleFilterContainer()"></ion-icon>
+            (click)="toggleFilterContainer(); search(searchTerm, dietTypes.value, healthTypes.value, dishTypes.value, cuisineTypes.value, mealTypes.value)"></ion-icon>
   <h3 style="text-align: center; color: black; margin-top: 50px">FILTER</h3>
   <ion-list>
     <ion-item>
@@ -74,7 +74,8 @@
         <ion-select-option value="">All</ion-select-option>
         <ion-select-option value="breakfast">Breakfast</ion-select-option>
         <ion-select-option value="brunch">Brunch</ion-select-option>
-        <ion-select-option value="lunch/dinner">Lunch/Dinner</ion-select-option>
+        <ion-select-option value="lunch">Lunch</ion-select-option>
+        <ion-select-option value="dinner">Dinner</ion-select-option>
         <ion-select-option value="snack">Snack</ion-select-option>
         <ion-select-option value="teatime">Teatime</ion-select-option>
       </ion-select>

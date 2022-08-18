@@ -62,12 +62,7 @@ export class RecipeService {
     if (mealType.length > 0) {
       mealType.forEach(q => {
         if (!(q === '')) {
-          if (q === 'lunch/dinner') {
-            q = 'lunch//dinner';
-            url += `&mealType=${q}`;
-          } else {
-            url += `&mealType=${q}`;
-          }
+          url += `&mealType=${q}`;
         }
       });
     }
