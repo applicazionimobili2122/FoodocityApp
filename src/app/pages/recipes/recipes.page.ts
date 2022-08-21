@@ -1,6 +1,12 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {RecipeService} from '../../services/recipes.service';
-import {InfiniteScrollCustomEvent, IonInfiniteScroll, IonSelect, LoadingController} from '@ionic/angular';
+import {
+  InfiniteScrollCustomEvent,
+  IonInfiniteScroll,
+  IonSelect,
+  LoadingController
+} from '@ionic/angular';
+import {PreferenceService} from '../../services/preferences.services';
 
 @Component({
   selector: 'app-recipes',
@@ -18,11 +24,35 @@ export class RecipesPage implements OnInit {
   @ViewChild('dishTypes') dishTypes: IonSelect;
   filtersContainer;
   recipes = [];
+  diets: string[] = [];
+  healths = [];
   currentPage = 1;
   searchTerm = '';
 
   constructor(private recipeService: RecipeService,
-              private loadingCtrl: LoadingController) {
+              private loadingCtrl: LoadingController,
+              private preferenceService: PreferenceService) {
+  }
+
+  ionViewWillEnter() {
+    this.filtersContainer.style.display = 'none';
+
+    this.preferenceService.loadPreferences().then((preferences) => {
+      preferences[0].then((diet) => {
+        diet.map((dieta) =>  // @ts-ignore
+          this.diets.push(dieta.label));
+      });
+    });
+
+    this.preferenceService.loadPreferences().then((preferences) => {
+      preferences[1].then((health) => {
+        health.map((salute) =>  // @ts-ignore
+          this.healths.push(salute.label));
+      });
+    });
+
+    this.dietTypes.value = this.diets;
+    this.healthTypes.value = this.healths;
   }
 
   ngOnInit() {
@@ -107,8 +137,7 @@ export class RecipesPage implements OnInit {
           }
         );
       } else {
-        //dietTypes, healthTypes,
-        this.recipeService.getAdvancedSearch(value, dietTypes, healthTypes,  cuisineTypes, mealTypes, dishTypes).subscribe(
+        this.recipeService.getAdvancedSearch(value, dietTypes, healthTypes, cuisineTypes, mealTypes, dishTypes).subscribe(
           (res) => {
             loading.dismiss();
             this.recipes = [...res.hits];
@@ -125,10 +154,12 @@ export class RecipesPage implements OnInit {
     }
   }
 
+  //Mostra i filtri di ricerca
   async toggleFilterContainer() {
     this.filtersContainer.style.display = this.filtersContainer.style.display === 'none' ? 'block' : 'none';
   }
 
+  //Reimposta tutti i filtri di ricerca a default
   async resetFilters() {
     this.dietTypes.value = '';
     this.healthTypes.value = '';

@@ -9,16 +9,15 @@
   </ion-toolbar>
 </ion-header>
 
-<div class="filters-container" id="filtersContainer" style="display: none">
-  <ion-icon name="close"
-            style="color: black; width: 40px; height: 40px; position: absolute; float: right; top:43px; right: 15px"
-            (click)="toggleFilterContainer(); search(searchTerm, dietTypes.value, healthTypes.value, dishTypes.value, cuisineTypes.value, mealTypes.value)"></ion-icon>
+<div class="filters-container" id="filtersContainer">
+  <ion-icon name="close" class="close-icon"
+            (click)="toggleFilterContainer(); search(searchTerm, dietTypes.value, healthTypes.value, dishTypes.value, cuisineTypes.value, mealTypes.value)">
+  </ion-icon>
   <h3 style="text-align: center; color: black; margin-top: 50px">FILTER</h3>
   <ion-list>
     <ion-item>
       <ion-label>Diet Types</ion-label>
-      <ion-select #dietTypes value="" [multiple]="true">
-        <ion-select-option value="">All</ion-select-option>
+      <ion-select #dietTypes [multiple]="true">
         <ion-select-option value="balanced">Balanced</ion-select-option>
         <ion-select-option value="high-fiber">High-Fiber</ion-select-option>
         <ion-select-option value="high-protein">High-Protein</ion-select-option>
@@ -30,7 +29,6 @@
     <ion-item>
       <ion-label>Health Types</ion-label>
       <ion-select #healthTypes value="" [multiple]="true">
-        <ion-select-option value="">All</ion-select-option>
         <ion-select-option value="alcohol-cocktail">Alcohol-Cocktail</ion-select-option>
         <ion-select-option value="alcohol-free">Alcohol-Free</ion-select-option>
         <ion-select-option value="celery-free">Celery-Free</ion-select-option>
@@ -71,7 +69,6 @@
     <ion-item>
       <ion-label>Meal Types</ion-label>
       <ion-select #mealTypes value="" [multiple]="true">
-        <ion-select-option value="">All</ion-select-option>
         <ion-select-option value="breakfast">Breakfast</ion-select-option>
         <ion-select-option value="brunch">Brunch</ion-select-option>
         <ion-select-option value="lunch">Lunch</ion-select-option>
@@ -83,7 +80,6 @@
     <ion-item>
       <ion-label>Cuisine Types</ion-label>
       <ion-select #cuisineTypes value="" [multiple]="true">
-        <ion-select-option value="">All</ion-select-option>
         <ion-select-option value="american">American</ion-select-option>
         <ion-select-option value="asian">Asian</ion-select-option>
         <ion-select-option value="british">British</ion-select-option>
@@ -109,7 +105,6 @@
     <ion-item>
       <ion-label>Dish Types</ion-label>
       <ion-select #dishTypes value="" [multiple]="true">
-        <ion-select-option value="">All</ion-select-option>
         <ion-select-option value="alcohol cocktail">Alcohol cocktail</ion-select-option>
         <ion-select-option value="biscuits and cookies">Biscuits and cookies</ion-select-option>
         <ion-select-option value="bread">Bread</ion-select-option>
@@ -162,36 +157,39 @@
     </ion-searchbar>
     <ion-icon name="filter" style="color: white" (click)="toggleFilterContainer()"></ion-icon>
   </div>
-  <ion-list>
-    <ion-item button="" *ngFor="let item of recipes; index as i" [routerLink]="[item.recipe.uri|slice:51]"
-              color="secondary">
 
-      <ion-thumbnail [slot]="i%2===0 ? 'start' : 'end'">
-        <img src="{{item.recipe.image}}" alt="recipe"/>
-      </ion-thumbnail>
+  <div class="infinite-list-container">
+    <ion-list>
+      <ion-item button="" *ngFor="let item of recipes; index as i" [routerLink]="[item.recipe.uri|slice:51]"
+                color="secondary">
 
-      <ion-label class="ion-text-wrap">
-        <h2 style="color: #4d3827">{{ item.recipe.label }}</h2>
+        <ion-thumbnail [slot]="i%2===0 ? 'start' : 'end'">
+          <img src="{{item.recipe.image}}" alt="recipe"/>
+        </ion-thumbnail>
 
-        <h4>{{ item.recipe.source }}</h4>
-        <p>{{ item.recipe.cuisineTypes }} food</p>
-        <p>{{ item.recipe.mealTypes }}</p>
-        <ion-icon name="timer-outline" slot="start"></ion-icon>
-        <ion-text
-          slot="start">{{ item.recipe.totalTime > 0 ? item.recipe.totalTime + "'" : 'Time not specified' }}</ion-text>
-      </ion-label>
-    </ion-item>
-  </ion-list>
+        <ion-label class="ion-text-wrap">
+          <h2 style="color: #4d3827">{{ item.recipe.label }}</h2>
 
-  <ion-infinite-scroll (ionInfinite)="loadMore($event)" #normalis>
-    <ion-infinite-scroll-content loadingSpinner="bubbles"
-                                 loadingText="Loading more data..."></ion-infinite-scroll-content>
-  </ion-infinite-scroll>
+          <h4>{{ item.recipe.source }}</h4>
+          <p>{{ item.recipe.cuisineTypes }} food</p>
+          <p>{{ item.recipe.mealTypes }}</p>
+          <ion-icon name="timer-outline" slot="start"></ion-icon>
+          <ion-text
+            slot="start">{{ item.recipe.totalTime > 0 ? item.recipe.totalTime + "'" : 'Time not specified' }}</ion-text>
+        </ion-label>
+      </ion-item>
+    </ion-list>
 
-  <ion-infinite-scroll (ionInfinite)="loadMoreSearch($event)" disabled="true" #searchis>
-    <ion-infinite-scroll-content loadingSpinner="bubbles"
-                                 loadingText="Loading more data..."></ion-infinite-scroll-content>
-  </ion-infinite-scroll>
+    <ion-infinite-scroll (ionInfinite)="loadMore($event)" #normalis>
+      <ion-infinite-scroll-content loadingSpinner="bubbles"
+                                   loadingText="Loading more data..."></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+
+    <ion-infinite-scroll (ionInfinite)="loadMoreSearch($event)" disabled="true" #searchis>
+      <ion-infinite-scroll-content loadingSpinner="bubbles"
+                                   loadingText="Loading more data..."></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </div>
 
   <script>
     const {$} = require("protractor");
