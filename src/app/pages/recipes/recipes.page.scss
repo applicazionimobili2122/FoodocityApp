@@ -1,6 +1,7 @@
 ion-thumbnail {
   min-width: 8rem;
   min-height: 8rem;
+
   img {
     max-width: 8rem;
     min-width: 8rem;
@@ -11,6 +12,7 @@ ion-thumbnail {
 ion-header ion-thumbnail {
   min-width: 4rem;
   min-height: 4rem;
+
   img {
     max-width: 4rem;
     min-width: 4rem;
@@ -24,13 +26,19 @@ h1 h2 h3 h4 h5 h6 {
 }
 
 ion-item {
+  font-size: 18px;
   border-radius: 10px !important;
   margin: 1em;
   backdrop-filter: blur(6px);
 }
 
-ion-content{
-  --ion-background-color: linear-gradient(to bottom, #529434, #c6ffab);
+ion-content {
+  padding: 0;
+  max-height: 77vh;
+}
+
+ion-list {
+  --ion-background-color: transparent;
 }
 
 ion-icon {
@@ -53,10 +61,66 @@ ion-icon {
   height: 40px;
   position: absolute;
   float: right;
-  top:43px;
+  top: 43px;
   right: 15px
 }
 
-.infinite-list-container {
+.searchbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 5px;
+  padding-right: 14px;
+}
 
+.cut-text {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 140px;
+  height: 1.2em;
+  white-space: nowrap;
+}
+
+dl {
+  margin-top: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+p {
+  margin-top: 3px;
+  margin-bottom: 3px;
+}
+
+.rectangle {
+  box-sizing: border-box;
+
+  background: linear-gradient(99.37deg, rgba(255, 255, 255, 0.49) 13.05%, rgba(255, 255, 255, 0.0735) 93.18%);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(40px);
+  /* Note: backdrop-filter has minimal browser support */
+  border-radius: 10px;
+
+  padding: 5px;
+  margin: 15px 15px 5px;
+}
+
+.recipe-card {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.recipe-img {
+  display: flex;
+  align-items: center;
+  margin-bottom: auto;
+  margin-top: auto;
+  margin-right: 5px;
+  width: 40%;
+  height: 100%;
 }
