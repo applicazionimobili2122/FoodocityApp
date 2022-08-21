@@ -167,11 +167,12 @@
           </div>
           <div class="recipe-desc" [style]="i%2===0 ? 'float: right' : 'float: left'">
 
-            <h4 class="cut-text" style="color: #4d3827; margin: 0 0 5px;">{{ item.recipe.label }}</h4>
+            <h4 class="cut-text"
+                style="color: #4d3827; margin: 0 0 5px; font-weight: bold">{{ item.recipe.label.toUpperCase() }}</h4>
             <p class="cut-text"> {{ item.recipe.source }} </p>
             <p class="cut-text"> {{ item.recipe.cuisineType }} food</p>
             <p class="cut-text"> {{ item.recipe.mealType }} </p>
-            <p class="cut-text">
+            <p class="cut-text" style="display: flex; align-items: center">
               <ion-icon name="timer-outline" slot="start"></ion-icon>
               {{ item.recipe.totalTime > 0 ? item.recipe.totalTime + "'" : '-' }}</p>
           </div>
