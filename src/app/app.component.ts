@@ -19,12 +19,7 @@ export class AppComponent implements OnInit {
     {
       title: 'Favourite Recipes',
       url: '/favourites',
-      icon: 'list'
-    },
-    {
-      title: 'Profile',
-      url: '/profile',
-      icon: 'person'
+      icon: 'heart'
     },
     {
       title:'Discover New Recipes',
@@ -35,6 +30,11 @@ export class AppComponent implements OnInit {
       title: 'Health and Diet',
       url: '/health',
       icon: 'nutrition'
+    },
+    {
+      title: 'Profile',
+      url: '/profile',
+      icon: 'person'
     }
   ];
 

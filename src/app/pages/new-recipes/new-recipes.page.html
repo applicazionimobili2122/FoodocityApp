@@ -1,45 +1,52 @@
-<ion-header [translucent]="true">
-  <ion-toolbar color="primary">
-    <ion-thumbnail>
-      <a href="/recipes"><img alt="logo" src="assets/icon/Logo.png"></a>
-    </ion-thumbnail>
-    <ion-buttons slot="end">
-      <ion-menu-button color="light"></ion-menu-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-  <ion-list>
-    <ion-item button="" *ngFor="let item of recipes; index as i" [routerLink]="[item.recipe.uri|slice:51]"
-              color="secondary">
-      <ion-thumbnail [slot]="i%2===0 ? 'start' : 'end'">
-        <img src="{{item.recipe.image}}" alt="recipe"/>
+<div
+  style="background: linear-gradient(to bottom, #529434, #c6ffab) !important; --ion-background-color: linear-gradient(to bottom, #529434, #c6ffab) !important; height: 100vh">
+  <ion-header style="background-color: transparent">
+    <div class="menu-bar">
+      <ion-thumbnail>
+        <a href="/recipes"><img alt="logo" src="assets/icon/Logo.png"></a>
       </ion-thumbnail>
+      <ion-buttons slot="end">
+        <ion-menu-button color="light"></ion-menu-button>
+      </ion-buttons>
+    </div>
+  </ion-header>
 
-      <ion-label class="ion-text-wrap">
-        <h2 style="color: #4d3827">{{ item.recipe.label }}</h2>
-        <h4>{{ item.recipe.source }}</h4>
-        <p>{{ item.recipe.cuisineType }} food</p>
-        <p>{{ item.recipe.mealType }}</p>
-        <ion-icon name="timer-outline" slot="start"></ion-icon>
-        <ion-text
-          slot="start">{{ item.recipe.totalTime > 0 ? item.recipe.totalTime + "'" : 'Time not specified' }}</ion-text>
-      </ion-label>
-    </ion-item>
-  </ion-list>
+  <ion-text class="ion-text-center" color="light">
+    <h2>NEW RECIPES</h2>
+  </ion-text>
 
-  <ion-infinite-scroll (ionInfinite)="loadMore($event)" #normalis>
-    <ion-infinite-scroll-content loadingSpinner="bubbles"
-                                 loadingText="Loading more data..."></ion-infinite-scroll-content>
-  </ion-infinite-scroll>
+  <ion-content>
+    <dl style="background-color: transparent; !important;">
+      <dd class="rectangle" *ngFor="let item of recipes; index as i" [routerLink]="['/recipes', item.recipe.uri|slice:51]">
+        <h6 class="cut-text"
+            style="color: #4d3827; margin: 5px; font-weight: bold; width: 250px">{{ item.recipe.label.toUpperCase() }}</h6>
+        <div class="recipe-card" [style.flex-flow]="i%2===0 ? 'row-reverse' : 'unset'">
+          <div class="recipe-img" >
+            <img src="{{item.recipe.image}}" alt="recipe" style="object-fit: cover"/>
+          </div>
+          <div class="recipe-desc" >
 
-  <ion-infinite-scroll (ionInfinite)="loadMoreSearch($event)" disabled="true" #searchis>
-    <ion-infinite-scroll-content loadingSpinner="bubbles"
-                                 loadingText="Loading more data..."></ion-infinite-scroll-content>
-  </ion-infinite-scroll>
+            <p class="cut-text"> {{ item.recipe.source }} </p>
+            <p class="cut-text"> {{ item.recipe.cuisineType }} food</p>
+            <p class="cut-text"> {{ item.recipe.mealType }} </p>
+            <p class="cut-text" style="display: flex; align-items: center">
+              <ion-icon name="timer-outline" slot="start"></ion-icon>
+              {{ item.recipe.totalTime > 0 ? item.recipe.totalTime + "'" : '-' }}</p>
+          </div>
+        </div>
+      </dd>
+    </dl>
 
+    <ion-infinite-scroll (ionInfinite)="loadMore($event)" #normalis>
+      <ion-infinite-scroll-content loadingSpinner="bubbles"
+                                   loadingText="Loading more data..."></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
 
-</ion-content>
+    <ion-infinite-scroll (ionInfinite)="loadMoreSearch($event)" disabled="true" #searchis>
+      <ion-infinite-scroll-content loadingSpinner="bubbles"
+                                   loadingText="Loading more data..."></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </ion-content>
 
+</div>
 

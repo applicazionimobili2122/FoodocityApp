@@ -70,7 +70,6 @@ export class RecipesPage implements OnInit {
     this.recipeService.getRandomRecipes().subscribe(
       (res) => {
         loading.dismiss();
-        console.log(...res.hits);
         this.recipes.push(...res.hits);
 
         event?.target.complete();

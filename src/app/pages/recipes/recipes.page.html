@@ -160,15 +160,14 @@
   <ion-content>
     <dl style="background-color: transparent; !important;">
       <dd class="rectangle" *ngFor="let item of recipes; index as i" [routerLink]="[item.recipe.uri|slice:51]">
-
-        <div class="recipe-card">
-          <div class="recipe-img" [style]="i%2===0 ? 'float: left' : 'float: right'">
+        <h6 class="cut-text"
+            style="color: #4d3827; margin: 5px; font-weight: bold; width: 250px">{{ item.recipe.label.toUpperCase() }}</h6>
+        <div class="recipe-card" [style.flex-flow]="i%2===0 ? 'row-reverse' : 'unset'">
+          <div class="recipe-img" >
             <img src="{{item.recipe.image}}" alt="recipe" style="object-fit: cover"/>
           </div>
-          <div class="recipe-desc" [style]="i%2===0 ? 'float: right' : 'float: left'">
+          <div class="recipe-desc" >
 
-            <h4 class="cut-text"
-                style="color: #4d3827; margin: 0 0 5px; font-weight: bold">{{ item.recipe.label.toUpperCase() }}</h4>
             <p class="cut-text"> {{ item.recipe.source }} </p>
             <p class="cut-text"> {{ item.recipe.cuisineType }} food</p>
             <p class="cut-text"> {{ item.recipe.mealType }} </p>

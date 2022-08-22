@@ -32,3 +32,7 @@ ion-text {
 ion-input {
   color: var(--ion-color-quaternary);
 }
+
+p, h1, h2, h3, h4, h5, h6, ion-text, ion-label {
+  font-family: Montserrat, sans-serif;
+}

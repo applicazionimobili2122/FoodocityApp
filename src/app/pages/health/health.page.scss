@@ -1,3 +1,14 @@
+ion-thumbnail {
+  min-width: 8rem;
+  min-height: 8rem;
+
+  img {
+    max-width: 8rem;
+    min-width: 8rem;
+    border-radius: 10px;
+  }
+}
+
 ion-header ion-thumbnail {
   min-width: 4rem;
   min-height: 4rem;
@@ -8,3 +19,39 @@ ion-header ion-thumbnail {
     border-radius: 10px;
   }
 }
+
+
+h1 h2 h3 h4 h5 h6 {
+  font-weight: bold;
+}
+
+.menu-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 25px;
+  padding-left: 14px;
+  padding-right: 4px;
+  height: 65px;
+}
+
+ion-item {
+  font-size: 18px;
+  border-radius: 10px !important;
+  margin: 1em;
+  backdrop-filter: blur(6px);
+}
+
+ion-content {
+  padding: 0;
+  max-height: 77vh;
+}
+
+ion-list {
+  --ion-background-color: transparent;
+}
+
+ion-icon {
+  font-size: 1.3rem;
+}
+

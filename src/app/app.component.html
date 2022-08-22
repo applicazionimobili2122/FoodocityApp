@@ -1,12 +1,9 @@
 <ion-app>
   <ion-split-pane contentId="main"><!--our side menu  -->
     <ion-menu contentId ="main" side="end">
-    <ion-header>
-      <ion-toolbar>
-
-      </ion-toolbar>
-    </ion-header>
     <ion-content>
+      <br>
+      <br>
       <ion-list>
         <ion-menu-toggle *ngFor="let p of appPages" auto-hide="false">
           <ion-item [routerDirection]="'root'" [routerLink]="[p.url]">
