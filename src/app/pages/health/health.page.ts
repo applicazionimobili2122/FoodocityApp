@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {PreferenceService} from '../../services/preferences.services';
 import {FormControl} from '@angular/forms';
 
@@ -16,30 +16,28 @@ export class HealthPage implements OnInit {
   constructor(private preferenceService: PreferenceService) {
   }
 
-  ionViewWillEnter() {
+  ngOnInit() {
     const diets = [];
-    this.preferenceService.loadPreferences().then((preferences) => {
-      preferences[0].then((diet) => {
-        diet.map((dieta) =>  // @ts-ignore
-          diets.push(dieta.label));
+    this.preferenceService.loadPreferences().then((pref) => {
+      pref[0].then((diet) => {
+        // @ts-ignore
+        diet.map((dieta) => diets.push(dieta.label));
+        this.dietSelect.setValue(diets);
       });
     });
 
     const healths = [];
     this.preferenceService.loadPreferences().then((preferences) => {
       preferences[1].then((health) => {
-        health.map((salute) =>  // @ts-ignore
-          healths.push(salute.label));
+        // @ts-ignore
+        health.map((salute) => healths.push(salute.label));
+        this.healthSelect.setValue(healths);
       });
     });
-
-    this.dietSelect.setValue(diets);
-    this.healthSelect.setValue(healths);
-
-    this.message = document.getElementById('msg');
   }
 
-  ngOnInit() {
+  ionViewWillEnter() {
+    this.message = document.getElementById('msg');
   }
 
   async loadPreferences() {
