@@ -29,7 +29,6 @@ export class RecipeService {
     );
   }
 
-  //TODO: Creare vista apposita e i filtri sul front-end
   getAdvancedSearch(query = '',
                     diet: string[] = [],
                     health: string[] = [],
