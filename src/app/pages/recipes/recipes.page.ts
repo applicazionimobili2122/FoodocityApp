@@ -2,12 +2,10 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {RecipeService} from '../../services/recipes.service';
 import {
   InfiniteScrollCustomEvent,
-  IonInfiniteScroll, IonSearchbar,
-  IonSelect,
+  IonInfiniteScroll, IonSelect,
   LoadingController, NavController
 } from '@ionic/angular';
 import {PreferenceService} from '../../services/preferences.services';
-import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-recipes',
@@ -75,7 +73,14 @@ export class RecipesPage implements OnInit {
     });
     await loading.present();
 
-    this.recipeService.getRandomRecipes().subscribe(
+    this.recipeService.getSearch(
+      this.searchTerm,
+      this.dietTypes.value,
+      this.healthTypes.value,
+      this.cuisineTypes.value,
+      this.mealTypes.value,
+      this.dishTypes.value
+    ).subscribe(
       (res) => {
         loading.dismiss();
         this.recipes.push(...res.hits);
