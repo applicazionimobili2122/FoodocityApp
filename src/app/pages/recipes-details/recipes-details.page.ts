@@ -27,10 +27,6 @@ export class RecipesDetailsPage implements OnInit {
     });
   }
 
-  openHomepage(url) {
-    window.open(url, '_blank');
-  }
-
   favorite(recipe) {
     if (this.isFavorite) {
       this.recipeService.favoriteRecipe(recipe);

@@ -23,55 +23,61 @@ export class RecipeService {
               private firestore: AngularFirestore) {
   }
 
-  getSimpleSearch(query = ''): Observable<ApiResult> {
-    return this.http.get<ApiResult>(
-      `${environment.baseUrl}?q=${query}&app_key=${environment.appKey}&random=true`
-    );
-  }
-
-  getAdvancedSearch(query = '',
+  getSearch(keyword = '',
                     diet: string[] = [],
                     health: string[] = [],
                     cuisineType: string[] = [],
                     mealType: string[] = [],
                     dishType: string[] = []): Observable<ApiResult> {
 
-    let url = `${environment.baseUrl}?q=${query}&app_key=${environment.appKey}&random=true`;
+    let url = `${environment.baseUrl}?&app_key=${environment.appKey}&random=true`;
+    let query = '';
+    if (keyword.length > 0) {
+          query += `&q=${keyword}`;
+    }
     if (diet.length > 0) {
       diet.forEach(q => {
         if (!(q === '')) {
-          url += `&diet=${q}`;
+          query += `&diet=${q}`;
         }
       });
     }
     if (health.length > 0) {
       health.forEach(q => {
         if (!(q === '')) {
-          url += `&health=${q}`;
+          query += `&health=${q}`;
         }
       });
     }
     if (cuisineType.length > 0) {
       cuisineType.forEach(q => {
         if (!(q === '')) {
-          url += `&cuisine=${q}`;
+          query += `&cuisineType=${q}`;
         }
       });
     }
     if (mealType.length > 0) {
       mealType.forEach(q => {
         if (!(q === '')) {
-          url += `&mealType=${q}`;
+          query += `&mealType=${q}`;
         }
       });
     }
     if (dishType.length > 0) {
       dishType.forEach(q => {
         if (!(q === '')) {
-          url += `&dishType=${q}`;
+          query += `&dishType=${q}`;
         }
       });
     }
+
+    if (query.length === 0) {
+      const items = ['pizza', 'pasta', 'meat', 'fish', 'veggies'];
+      query = '&q=' + items[Math.floor(Math.random() * items.length)];
+      console.log(query);
+    }
+
+    url += query;
 
     console.log(url);
 

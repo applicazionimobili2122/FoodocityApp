@@ -13,7 +13,7 @@
 
   <div class="filters-container" id="filtersContainer">
     <ion-icon name="close" class="close-icon"
-              (click)="toggleFilterContainer(); search(searchTerm, dietTypes.value, healthTypes.value, dishTypes.value, cuisineTypes.value, mealTypes.value)">
+              (click)="toggleFilterContainer(); search()">
     </ion-icon>
     <h3 style="text-align: center; color: black; margin-top: 50px">FILTER</h3>
     <ion-list>
@@ -149,9 +149,9 @@
       placeholder="Find Recipe"
       color="light"
       [(ngModel)]="searchTerm"
-      (keyup.enter)="search($event.target.value, dietTypes.value, healthTypes.value, dishTypes.value, cuisineTypes.value, mealTypes.value)"
-      (search)="search($event.target.value, dietTypes.value, healthTypes.value, dishTypes.value, cuisineTypes.value, mealTypes.value)"
-      (ionClear)="resetFilters(); search($event.target.value, dietTypes.value, healthTypes.value, dishTypes.value, cuisineTypes.value, mealTypes.value)"
+      (keyup.enter)="search()"
+      (search)="search()"
+      (ionClear)="resetFilters(); search()"
     >
     </ion-searchbar>
     <ion-icon name="filter" style="color: white" (click)="toggleFilterContainer()"></ion-icon>
@@ -159,7 +159,7 @@
 
   <ion-content>
     <dl style="background-color: transparent; !important;">
-      <dd class="rectangle" *ngFor="let item of recipes; index as i" [routerLink]="[item.recipe.uri|slice:51]">
+      <dd class="rectangle" *ngFor="let item of recipes; index as i" (click)="openRecipe(item.recipe.uri)">
         <h6 class="cut-text"
             style="color: #4d3827; margin: 5px; font-weight: bold; width: 250px">{{ item.recipe.label.toUpperCase() }}</h6>
         <div class="recipe-card" [style.flex-flow]="i%2===0 ? 'row-reverse' : 'unset'">

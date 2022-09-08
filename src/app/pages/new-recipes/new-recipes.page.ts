@@ -1,6 +1,12 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {RecipeService} from '../../services/recipes.service';
-import {InfiniteScrollCustomEvent, IonInfiniteScroll, LoadingController, ModalController} from '@ionic/angular';
+import {
+  InfiniteScrollCustomEvent,
+  IonInfiniteScroll,
+  IonInput, IonSearchbar,
+  LoadingController,
+  ModalController
+} from '@ionic/angular';
 
 @Component({
   selector: 'app-recipes',
@@ -11,13 +17,22 @@ export class NewRecipesPage implements OnInit {
 
   @ViewChild('normalis') infiniteScroll: IonInfiniteScroll;
   @ViewChild('searchis') infiniteScroll2: IonInfiniteScroll;
+  @ViewChild('searchTerm') searchTerm: IonSearchbar;
   recipes = [];
   currentPage = 1;
-  searchTerm = '';
 
   constructor(private recipeService: RecipeService,
               private loadingCtrl: LoadingController,
-              private modalController: ModalController) { }
+              private modalController: ModalController) {
+  }
+
+  ionViewWillEnter() {
+    this.recipes = [];
+    this.currentPage = 1;
+    this.loadRecipes();
+    this.infiniteScroll.disabled = false;
+    this.infiniteScroll2.disabled = true;
+  }
 
   ngOnInit() {
     this.loadRecipes();
@@ -58,7 +73,7 @@ export class NewRecipesPage implements OnInit {
   }
 
   newSearch(event: InfiniteScrollCustomEvent) {
-    this.recipeService.getSimpleSearch(this.searchTerm).subscribe(
+    this.recipeService.getSearch(this.searchTerm.value.toString()).subscribe(
       (res) => {
         this.recipes.push(...res.hits);
         event.target.complete();
@@ -72,33 +87,25 @@ export class NewRecipesPage implements OnInit {
     );
   }
 
-  async search(value) {
-    if (value === '') {
-      this.recipes = [];
-      this.currentPage = 1;
-      this.loadRecipes();
-      this.infiniteScroll.disabled = false;
-      this.infiniteScroll2.disabled = true;
-    } else {
-      const loading = await this.loadingCtrl.create({
-        message: 'Loading..',
-        spinner: 'bubbles',
-      });
-      await loading.present();
+  async search() {
+    const loading = await this.loadingCtrl.create({
+      message: 'Loading..',
+      spinner: 'bubbles',
+    });
+    await loading.present();
 
-      this.recipeService.getSimpleSearch(value).subscribe(
-        (res) => {
-          loading.dismiss();
-          this.recipes = [...res.hits];
-          this.infiniteScroll.disabled = true;
-          this.infiniteScroll2.disabled = false;
-        },
-        (err) => {
-          console.log(err);
-          loading.dismiss();
-          this.recipes = [];
-        }
-      );
-    }
+    this.recipeService.getSearch(this.searchTerm.value.toString()).subscribe(
+      (res) => {
+        loading.dismiss();
+        this.recipes = [...res.hits];
+        this.infiniteScroll.disabled = true;
+        this.infiniteScroll2.disabled = false;
+      },
+      (err) => {
+        console.log(err);
+        loading.dismiss();
+        this.recipes = [];
+      }
+    );
   }
 }

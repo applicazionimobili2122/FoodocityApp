@@ -2,11 +2,12 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {RecipeService} from '../../services/recipes.service';
 import {
   InfiniteScrollCustomEvent,
-  IonInfiniteScroll,
+  IonInfiniteScroll, IonSearchbar,
   IonSelect,
-  LoadingController
+  LoadingController, NavController
 } from '@ionic/angular';
 import {PreferenceService} from '../../services/preferences.services';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-recipes',
@@ -22,16 +23,17 @@ export class RecipesPage implements OnInit {
   @ViewChild('mealTypes') mealTypes: IonSelect;
   @ViewChild('cuisineTypes') cuisineTypes: IonSelect;
   @ViewChild('dishTypes') dishTypes: IonSelect;
+  searchTerm = '';
   filtersContainer;
   recipes = [];
   diets: string[] = [];
   healths = [];
   currentPage = 1;
-  searchTerm = '';
 
   constructor(private recipeService: RecipeService,
               private loadingCtrl: LoadingController,
-              private preferenceService: PreferenceService) {
+              private preferenceService: PreferenceService,
+              private navController: NavController) {
   }
 
   ionViewWillEnter() {
@@ -53,6 +55,12 @@ export class RecipesPage implements OnInit {
 
     this.dietTypes.value = this.diets;
     this.healthTypes.value = this.healths;
+
+    this.recipes = [];
+    this.currentPage = 1;
+    this.loadRecipes();
+    this.infiniteScroll.disabled = false;
+    this.infiniteScroll2.disabled = true;
   }
 
   ngOnInit() {
@@ -95,7 +103,14 @@ export class RecipesPage implements OnInit {
   }
 
   newSearch(event: InfiniteScrollCustomEvent) {
-    this.recipeService.getSimpleSearch(this.searchTerm).subscribe(
+    this.recipeService.getSearch(
+      this.searchTerm,
+      this.dietTypes.value,
+      this.healthTypes.value,
+      this.cuisineTypes.value,
+      this.mealTypes.value,
+      this.dishTypes.value
+    ).subscribe(
       (res) => {
         this.recipes.push(...res.hits);
         event.target.complete();
@@ -109,49 +124,37 @@ export class RecipesPage implements OnInit {
     );
   }
 
-  async search(value, dietTypes, healthTypes, dishTypes, cuisineTypes, mealTypes) {
-    if (value === '') {
-      this.recipes = [];
-      this.currentPage = 1;
-      this.loadRecipes();
-      this.infiniteScroll.disabled = false;
-      this.infiniteScroll2.disabled = true;
-    } else {
-      const loading = await this.loadingCtrl.create({
-        message: 'Loading..',
-        spinner: 'bubbles',
-      });
-      await loading.present();
-      if (dishTypes[0] === '' && cuisineTypes[0] === '' && mealTypes[0] === '' && healthTypes[0] === '' && dietTypes[0] === '') {
-        this.recipeService.getSimpleSearch(value).subscribe(
-          (res) => {
-            loading.dismiss();
-            this.recipes = [...res.hits];
-            this.infiniteScroll.disabled = true;
-            this.infiniteScroll2.disabled = false;
-          },
-          (err) => {
-            console.log(err);
-            loading.dismiss();
-            this.recipes = [];
-          }
-        );
-      } else {
-        this.recipeService.getAdvancedSearch(value, dietTypes, healthTypes, cuisineTypes, mealTypes, dishTypes).subscribe(
-          (res) => {
-            loading.dismiss();
-            this.recipes = [...res.hits];
-            this.infiniteScroll.disabled = true;
-            this.infiniteScroll2.disabled = false;
-          },
-          (err) => {
-            console.log(err);
-            loading.dismiss();
-            this.recipes = [];
-          }
-        );
+  async search() {
+    const loading = await this.loadingCtrl.create({
+      message: 'Loading..',
+      spinner: 'bubbles',
+    });
+    await loading.present();
+
+    this.recipeService.getSearch(
+      this.searchTerm,
+      this.dietTypes.value,
+      this.healthTypes.value,
+      this.cuisineTypes.value,
+      this.mealTypes.value,
+      this.dishTypes.value
+    ).subscribe(
+      (res) => {
+        loading.dismiss();
+        this.recipes = [...res.hits];
+        this.infiniteScroll.disabled = true;
+        this.infiniteScroll2.disabled = false;
+      },
+      (err) => {
+        console.log(err);
+        loading.dismiss();
+        this.recipes = [];
       }
-    }
+    );
+  }
+
+  async openRecipe(uri: string) {
+    await this.navController.navigateRoot(`/recipes/${uri.slice(51)}`);
   }
 
   //Mostra i filtri di ricerca
