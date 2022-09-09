@@ -1,4 +1,4 @@
-import {HttpClient, HttpUrlEncodingCodec} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {environment} from 'src/environments/environment';
@@ -74,12 +74,9 @@ export class RecipeService {
     if (query.length === 0) {
       const items = ['pizza', 'pasta', 'meat', 'fish', 'veggies'];
       query = '&q=' + items[Math.floor(Math.random() * items.length)];
-      console.log(query);
     }
 
     url += query;
-
-    console.log(url);
 
     return this.http.get<ApiResult>(
       url

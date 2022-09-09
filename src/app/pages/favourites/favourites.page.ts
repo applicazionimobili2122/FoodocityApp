@@ -85,22 +85,21 @@ export class FavouritesPage implements OnInit {
     // this.cuisineTypes.value;
     // this.mealTypes.value;
     // this.dishTypes.value;
-
-    this.recipes = this.recipesCopy;
-    console.log(this.mealTypes.value);
-
+    this.recipes = this.recipesCopy.slice();
     this.recipes = this.recipes
-      .filter((recipe) => recipe.recipe.cuisineType.some(r => this.cuisineTypes.value !== '' && this.cuisineTypes.value !== [] ?
+      .filter((recipe) => recipe.recipe.dishType.some(r => this.dishTypes.value !== '' && this.dishTypes.value.length !== 0 ?
+        this.dishTypes.value.includes(r) : true))
+      .filter((recipe) => recipe.recipe.mealType.some(r => this.mealTypes.value !== '' && this.mealTypes.value.length !== 0 ?
+        this.mealTypes.value.includes(r) : true))
+      .filter((recipe) => recipe.recipe.cuisineType.some(r => this.cuisineTypes.value !== '' && this.cuisineTypes.value.length !== 0 ?
         this.cuisineTypes.value.includes(r) : true))
-      //.filter((recipe) => recipe.recipe.healthLabels.some(r => this.healthTypes.value !== '' && this.healthTypes.value !== []?
-      // this.healthTypes.value.includes(r) : true)
-      .filter((recipe) => recipe.recipe.dishType.some(r => this.dishTypes.value !== '' && this.dishTypes.value !== []?
-        this.dishTypes.value.includes(r): true))
-      //.filter((recipe) =>  recipe.recipe.dietLabels.some(r => this.dietTypes.value !== '' && this.dietTypes.value !== []?
-      // this.dietTypes.value.includes(r): true)
-      .filter((recipe) =>  recipe.recipe.mealType.some(r => this.mealTypes.value !== '' && this.mealTypes.value !== []?
-        this.mealTypes.value.includes(r): true)
-    );
+      .filter((recipe) => recipe.recipe.healthLabels.length !== 0 ? recipe.recipe.healthLabels.some(r => this.healthTypes.value !== ''
+      && this.healthTypes.value.length !== 0 ?
+        this.healthTypes.value.includes(r) : true) : true)
+      .filter((recipe) => recipe.recipe.dietLabels.length !== 0 ? recipe.recipe.dietLabels.some(r => this.dietTypes.value !== ''
+        && this.dietTypes.value.length !== 0 ?
+          this.dietTypes.value.includes(r) : true) : true
+      );
   }
 
   //Mostra i filtri di ricerca
@@ -109,12 +108,13 @@ export class FavouritesPage implements OnInit {
   }
 
   //Reimposta tutti i filtri di ricerca a default
-  async resetFilters() {
+  resetFilters() {
     this.dietTypes.value = '';
     this.healthTypes.value = '';
     this.mealTypes.value = '';
     this.cuisineTypes.value = '';
     this.dishTypes.value = '';
-    this.recipes = this.recipesCopy;
+    this.recipes = this.recipesCopy.slice();
+    this.toggleFilterContainer();
   }
 }
