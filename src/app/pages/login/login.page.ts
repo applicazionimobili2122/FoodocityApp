@@ -62,7 +62,6 @@ export class LoginPage implements OnInit {
   onLogin() {
     this.ionicAuthService.signinUser(this.loginFormModel.value)
       .then((response) => {
-        console.log(response);
         this.errorMsg = '';
         this.navController.navigateRoot('/recipes');
       }, error => {

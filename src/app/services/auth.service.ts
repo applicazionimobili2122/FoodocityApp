@@ -39,7 +39,6 @@ export class IonicAuthService {
         .then(
           res => {
             resolve(res);
-            this.angularFireAuth.setPersistence('LOCAL');
           },
           err => reject(err));
     });
