@@ -1,4 +1,4 @@
-import {Component, OnInit,ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {RecipeService} from '../../services/recipes.service';
 import {IonSelect, LoadingController} from '@ionic/angular';
 import {PreferenceService} from '../../services/preferences.services';
@@ -14,12 +14,13 @@ export class FavouritesPage implements OnInit {
   @ViewChild('mealTypes') mealTypes: IonSelect;
   @ViewChild('cuisineTypes') cuisineTypes: IonSelect;
   @ViewChild('dishTypes') dishTypes: IonSelect;
-  searchTerm = '';
   filtersContainer;
+  searchTerm = '';
   diets: string[] = [];
   healths = [];
   currentPage = 1;
   recipes = [];
+  recipesCopy = [];
 
   constructor(private loadingCtrl: LoadingController,
               private recipeService: RecipeService,
@@ -51,7 +52,7 @@ export class FavouritesPage implements OnInit {
   }
 
   ngOnInit() {
-    this.filtersContainer = document.getElementById('filtersContainer');
+    this.filtersContainer = document.getElementById('filtersContainer2');
   }
 
   async loadRecipes() {
@@ -69,6 +70,7 @@ export class FavouritesPage implements OnInit {
           });
         }
         loading.dismiss();
+        this.recipesCopy = this.recipes;
       },
       (err) => {
         console.log(err);
@@ -76,13 +78,33 @@ export class FavouritesPage implements OnInit {
     );
   }
 
-  //TODO: creare il filtro
   filter() {
 
+    // this.dietTypes.value;
+    // this.healthTypes.value;
+    // this.cuisineTypes.value;
+    // this.mealTypes.value;
+    // this.dishTypes.value;
+
+    this.recipes = this.recipesCopy;
+    console.log(this.mealTypes.value);
+
+    this.recipes = this.recipes
+      .filter((recipe) => recipe.recipe.cuisineType.some(r => this.cuisineTypes.value !== '' && this.cuisineTypes.value !== [] ?
+        this.cuisineTypes.value.includes(r) : true))
+      //.filter((recipe) => recipe.recipe.healthLabels.some(r => this.healthTypes.value !== '' && this.healthTypes.value !== []?
+      // this.healthTypes.value.includes(r) : true)
+      .filter((recipe) => recipe.recipe.dishType.some(r => this.dishTypes.value !== '' && this.dishTypes.value !== []?
+        this.dishTypes.value.includes(r): true))
+      //.filter((recipe) =>  recipe.recipe.dietLabels.some(r => this.dietTypes.value !== '' && this.dietTypes.value !== []?
+      // this.dietTypes.value.includes(r): true)
+      .filter((recipe) =>  recipe.recipe.mealType.some(r => this.mealTypes.value !== '' && this.mealTypes.value !== []?
+        this.mealTypes.value.includes(r): true)
+    );
   }
 
   //Mostra i filtri di ricerca
-  async toggleFilterContainer() {
+  toggleFilterContainer() {
     this.filtersContainer.style.display = this.filtersContainer.style.display === 'none' ? 'block' : 'none';
   }
 
@@ -93,5 +115,6 @@ export class FavouritesPage implements OnInit {
     this.mealTypes.value = '';
     this.cuisineTypes.value = '';
     this.dishTypes.value = '';
+    this.recipes = this.recipesCopy;
   }
 }

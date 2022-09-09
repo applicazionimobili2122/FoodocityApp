@@ -11,7 +11,7 @@
     </div>
   </ion-header>
 
-  <div class="filters-container" id="filtersContainer">
+  <div class="filters-container" id="filtersContainer2" style="display: none;">
     <ion-icon name="close" class="close-icon"
               (click)="toggleFilterContainer(); filter()">
     </ion-icon>
@@ -73,8 +73,8 @@
         <ion-select #mealTypes value="" [multiple]="true">
           <ion-select-option value="breakfast">Breakfast</ion-select-option>
           <ion-select-option value="brunch">Brunch</ion-select-option>
-          <ion-select-option value="lunch">Lunch</ion-select-option>
-          <ion-select-option value="dinner">Dinner</ion-select-option>
+          <ion-select-option value="lunch/dinner">Lunch</ion-select-option>
+          <ion-select-option value="lunch/dinner">Dinner</ion-select-option>
           <ion-select-option value="snack">Snack</ion-select-option>
           <ion-select-option value="teatime">Teatime</ion-select-option>
         </ion-select>
